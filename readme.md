@@ -1,4 +1,4 @@
-# Push_swap
+# Minishell
 
 [![kimchi-mandoo-shell's 42 Push_swap Score](https://badge42.herokuapp.com/api/project/jaeskim/minishell)](https://github.com/JaeSeoKim/badge42)
 
