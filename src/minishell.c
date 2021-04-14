@@ -48,6 +48,6 @@ int	main(int argc, char *argv[], char *envp[])
 
 	init_envp(argc, argv, envp, &env);
 	printf("minishell!\n");
-	exec_cmd(parse_cmd(argv[argc - 1]));
+	exec_cmd(parse_cmd(argv[argc - 1]), envp);
 	return (0);
 }

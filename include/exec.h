@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/14 13:42:13 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/14 20:13:06 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "minishell.h"
 
-int		exec_cmd(t_AST *cmds);
+int		exec_cmd(t_AST *cmds, char **envp);
 
 #endif
