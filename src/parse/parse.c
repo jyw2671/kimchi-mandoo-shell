@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/14 13:44:33 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/04/14 13:39:46 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/04/14 13:49:20 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-
-# include <libft.h>
-# include "minishell_type.h"
-
-# include "parse.h"
-# include "exec.h"
-
-#endif
+t_AST	*parse_cmd(char *cmd)
+{
+	printf("parse_cmd! : %s\n", cmd);
+	return (0);
+}

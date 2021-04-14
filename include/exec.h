@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/14 13:44:33 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/04/14 13:42:13 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXEC_H
+# define EXEC_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
+# include "minishell.h"
 
-# include <libft.h>
-# include "minishell_type.h"
-
-# include "parse.h"
-# include "exec.h"
+int		exec_cmd(t_AST *cmds);
 
 #endif
