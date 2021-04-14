@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 03:15:26 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/03/19 06:50:48 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/14 16:43:24 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*ft_itoa(int n)
 	size_t			len;
 
 	nbr = n;
+	if (n < 0)
+		nbr = -n;
 	if (n == 0)
 		return (ft_strdup("0"));
 	else
@@ -56,7 +58,7 @@ char	*ft_itoa(int n)
 		result = (char *)malloc(sizeof(char) * (len + 1));
 		if (result == NULL)
 			return (0);
-		ft_write_nbrber((result + len - 1), n < 0 ? -nbr : nbr);
+		ft_write_nbrber((result + len - 1), nbr);
 		if (n < 0)
 			*result = '-';
 		result[len] = '\0';

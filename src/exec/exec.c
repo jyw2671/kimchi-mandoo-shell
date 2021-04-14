@@ -6,13 +6,13 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:45:21 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/14 13:49:20 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/14 16:43:22 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		exec_cmd(t_AST *cmds)
+int	exec_cmd(t_AST *cmds)
 {
 	printf("execute cmd : %p\n", cmds);
 	return (0);
