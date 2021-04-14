@@ -2,16 +2,8 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	int	i;
-
+	(void)envp;
 	printf("minishell!\n");
-	i = 0;
-	while (i < argc)
-		printf("%s\n", argv[i++]);
-
-	i = 0;
-	while (envp[i])
-		printf("%s\n", envp[i++]);
-
+	exec_cmd(parse_cmd(argv[argc - 1]));
 	return (0);
 }

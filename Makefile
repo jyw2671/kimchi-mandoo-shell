@@ -6,7 +6,7 @@
 #    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/04/05 22:33:04 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/04/14 13:49:17 by jaeskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,21 @@ CFLAGS += -I $(LIBFT_INC_DIR)
 
 HEADERS = $(wildcard $(INC_DIR)/*.h)
 
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+PARSE_DIR = $(SRC_DIR)/parse
+PARSE_SRC = $(wildcard $(PARSE_DIR)/*.c)
+
+EXEC_DIR = $(SRC_DIR)/exec
+EXEC_SRC = $(wildcard $(EXEC_DIR)/*.c)
+
+SRCS = \
+	$(wildcard $(SRC_DIR)/*.c)	\
+	$(PARSE_SRC)	\
+	$(EXEC_SRC)
 
 vpath %.c \
-	$(SRC_DIR) \
+	$(SRC_DIR)	\
+	$(PARSE_DIR)	\
+	$(EXEC_DIR)
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
