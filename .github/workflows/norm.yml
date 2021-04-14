@@ -1,4 +1,4 @@
-name: check norminette@v3
+name: norminette@v3
 on:
   push:
     branches:
