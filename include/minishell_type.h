@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/14 13:10:39 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/16 20:10:44 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,10 @@ typedef struct s_AST
 	void	*data;
 }	t_AST;
 
-/*
-** t_arg type define
-**
-** FT_ARG_NORMAL -> work with `*`, escape word working with ` `
-** FT_ARG_QUOTE -> literal value, escape word working only `'`
-** FT_ARG_QUOTES -> start with `$` will be change to env ,
-**                  escape word working with `"`
-*/
-
-# define FT_ARG_NORMAL	1
-# define FT_ARG_QUOTE	2
-# define FT_ARG_QUOTES	3
-
-typedef struct s_arg
-{
-	int		type;
-	char	*data;
-}	t_arg;
-
 typedef struct s_cmd
 {
 	char	*cmd;
-	t_arg	*args;
+	char	*args;
 }	t_cmd;
 
 typedef struct s_pipe
@@ -81,7 +62,7 @@ typedef struct s_pipe
 typedef struct s_redirect
 {
 	int		type;
-	char	*cmd;
+	char	*AST;
 	char	*file;
 }	t_redirect;
 
