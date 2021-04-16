@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/04/14 20:22:45 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/16 19:59:21 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ static char	**init_envp(int argc, char *argv[], char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	**env;
+	t_list	*ASTs;
 
-	env = init_envp(argc, argv, envp);
 	printf("minishell!\n");
-	exec_cmd(parse_cmd(argv[argc - 1]), env);
+	env = init_envp(argc, argv, envp);
+	ASTs = parse_line(argv[argc - 1]);
+	exec_cmd(ASTs, env);
 	return (0);
 }
