@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/16 20:10:44 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/16 21:40:33 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_AST
 typedef struct s_cmd
 {
 	char	*cmd;
-	char	*args;
+	char	**args;
 }	t_cmd;
 
 typedef struct s_pipe
