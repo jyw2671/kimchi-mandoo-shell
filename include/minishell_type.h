@@ -62,7 +62,7 @@ typedef struct s_pipe
 typedef struct s_redirect
 {
 	int		type;
-	char	*AST;
+	t_AST	*AST;
 	char	*file;
 }	t_redirect;
 
