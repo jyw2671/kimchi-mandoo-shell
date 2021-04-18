@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:39:46 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/16 20:57:25 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/18 17:31:02 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,22 @@ t_list	*parse_line(char *line)
 	printf("%s=============================================================%s\n",
 		TEXT_COLOR, NO_COLOR);
 	tokens = tokenizer(line);
-	printf("[ ");
-	i = 0;
-	while (tokens[i])
+	if (tokens == PARSE_MALLOC)
+		printf("%sERROR: Memory allocation failure%s\n", TEXT_COLOR, NO_COLOR);
+	else if (tokens == (char **)PARSE_INVAILD)
+		printf("%sERROR: Invaild command%s\n", TEXT_COLOR, NO_COLOR);
+	else
 	{
-		printf("%s\"%s%s%s\"%s, ", \
-			TEXT_COLOR, VALUE_COLOR, tokens[i], TEXT_COLOR, NO_COLOR);
-		free(tokens[++i]);
+		printf("[ ");
+		i = 0;
+		while (tokens[i])
+		{
+			printf("%s\"%s%s%s\"%s, ", \
+				TEXT_COLOR, VALUE_COLOR, tokens[i], TEXT_COLOR, NO_COLOR);
+			free(tokens[++i]);
+		}
+		printf("]\n");
+		free(tokens);
 	}
-	printf("]\n");
-	free(tokens);
 	return (0);
 }
