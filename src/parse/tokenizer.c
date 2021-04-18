@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 20:24:25 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/18 17:44:07 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/18 22:32:40 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*get_token(char **line)
 	char	*token;
 	char	temp[2];
 
-	if (ft_strchr("<>|&;", *line))
+	if (ft_strchr("<>|&;", **line))
 		return (get_static_token(line));
 	flag = TK_NONE;
 	token = ft_strdup("");
