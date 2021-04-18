@@ -21,7 +21,7 @@ static void	*free_tokenizer(t_list *token, void *ret)
 
 static int	check_flag(int flag, char **line)
 {
-	if (!(flag & TK_ESCAPE) && !(flag & TK_QOUTE) && !(flag & TK_QOUTES))
+	if (flag == TK_NONE)
 	{
 		if (**line == '\\')
 			flag |= TK_ESCAPE;
