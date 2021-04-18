@@ -6,7 +6,7 @@
 #    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/24 20:10:49 by jaeskim           #+#    #+#              #
-#    Updated: 2021/03/20 14:22:44 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/04/18 16:40:56 by jaeskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC_LST = $(addprefix $(SRC_LST_DIR)/, \
 	ft_lstnew.c	\
 	ft_lstsize.c	\
 	ft_lstsort.c	\
+	ft_lst_to_array.c	\
 )
 
 SRC_MATH_DIR = $(SRC_DIR)/math
@@ -78,6 +79,8 @@ SRC_MEMORY = $(addprefix $(SRC_MEMORY_DIR)/, \
 	ft_memmove.c	\
 	ft_memset.c	\
 	ft_malloc.c	\
+	ft_free.c	\
+	ft_free_ret.c	\
 )
 
 SRC_STRING_DIR = $(SRC_DIR)/string
@@ -103,6 +106,7 @@ SRC_STRING = $(addprefix $(SRC_STRING_DIR)/, \
 	ft_convert_base_unsigned.c	\
 	ft_convert_base.c	\
 	ft_strjoin_free.c	\
+	ft_strndup_move.c	\
 )
 
 SRC_TYPE_DIR = $(SRC_DIR)/type
