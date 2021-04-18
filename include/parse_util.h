@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/17 22:58:48 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/18 17:29:51 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define TEXT_COLOR "\e[38;2;255;121;198m"
 # define VALUE_COLOR "\e[38;2;189;147;249m"
 
+# define TK_IFS		" \n\t"
 # define TK_NONE	0
 # define TK_QOUTE	1
 # define TK_QOUTES	2
