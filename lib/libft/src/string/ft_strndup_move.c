@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   ft_strndup_move.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 13:45:21 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/16 19:56:25 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/04/18 16:12:08 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/04/18 16:14:43 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	exec_cmd(t_list *ASTs, char **envp)
+char	*ft_strndup_move(const char *s, size_t n, char **target)
 {
-	int		i;
-
-	printf("execute ASTs : %p\n", ASTs);
-	i = 0;
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		++i;
-	}
-	return (0);
+	*target += n;
+	return (ft_strndup(s, n));
 }

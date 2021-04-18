@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   ft_lst_to_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 13:45:21 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/16 19:56:25 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/04/18 15:14:51 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/04/18 15:41:28 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	exec_cmd(t_list *ASTs, char **envp)
+void	**ft_lst_to_array(t_list **lst)
 {
 	int		i;
+	t_list	*tmp;
+	void	**result;
 
-	printf("execute ASTs : %p\n", ASTs);
+	result = malloc(sizeof(void *) * (ft_lstsize(*lst) + 1));
+	if (result == NULL)
+		return (0);
 	i = 0;
-	while (envp[i])
+	while (*lst)
 	{
-		printf("%s\n", envp[i]);
-		++i;
+		result[i++] = (*lst)->content;
+		tmp = *lst;
+		*lst = (*lst)->next;
+		free(*lst);
 	}
-	return (0);
+	result[i] = 0;
+	return (result);
 }

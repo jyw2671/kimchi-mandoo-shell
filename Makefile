@@ -6,7 +6,7 @@
 #    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/04/14 13:49:17 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/04/18 16:17:31 by jaeskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,11 +97,19 @@ $(NAME) : $(LIBFT_FILE) $(HEADERS) $(OBJS)
 	@$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(OBJS) -o $@
 	@printf "$(LF)🎉 $(FG_TEXT)Successfully Created $(FG_TEXT_PRIMARY)$@ $(FG_TEXT)!\n$(NO_COLOR)"
 
+# lib
+lib : $(LIBFT)
+
+lib_re : $(LIBFT)_re
+
 # libft
 $(LIBFT) : $(LIBFT_FILE)
 
 $(LIBFT_FILE) :
 	@make --no-print-directory -C $(LIBFT_DIR)
+
+$(LIBFT)_re :
+	@make --no-print-directory -C $(LIBFT_DIR) re
 
 $(LIBFT)_clean :
 	@make --no-print-directory -C $(LIBFT_DIR) clean
@@ -111,4 +119,5 @@ $(LIBFT)_fclean :
 
 
 .PHONY: all clean fclean re test \
+	lib lib_re	\
 	$(LIBFT) $(LIBFT)_clean $(LIBFT)_fclean
