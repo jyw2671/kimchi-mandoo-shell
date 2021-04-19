@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_type.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/16 21:40:33 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/19 22:00:35 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define FT_CMD			1
 # define FT_PIPE		2
 # define FT_REDIRECT	3
-# define FT_CONDITION	4
+# define FT_CONTROL_OP	4
 
 typedef struct s_AST
 {
@@ -76,11 +76,11 @@ typedef struct s_redirect
 # define FT_OR	1
 # define FT_AND	2
 
-typedef struct s_cond
+typedef struct s_con_op
 {
 	int		type;
 	t_AST	*left;
 	t_AST	*right;
-}	t_cond;
+}	t_con_op;
 
 #endif
