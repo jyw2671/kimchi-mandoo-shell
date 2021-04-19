@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/19 22:13:50 by yjung            ###   ########.fr       */
+/*   Updated: 2021/04/19 22:16:07 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define FT_CMD			1
 # define FT_PIPE		2
 # define FT_REDIRECT	3
-# define FT_CONDITION	4
+# define FT_CONTROL_OP	4
 
 typedef struct s_AST
 {
