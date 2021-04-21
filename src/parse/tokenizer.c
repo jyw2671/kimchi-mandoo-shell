@@ -6,18 +6,12 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 20:24:25 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/20 18:59:35 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/22 02:41:36 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parse_util.h"
-
-static void	*free_tokenizer(t_list *token, void *ret)
-{
-	ft_lstclear(&token, ft_free);
-	return (ret);
-}
 
 static int	check_flag(int flag, char **line)
 {
@@ -42,7 +36,7 @@ static int	check_flag(int flag, char **line)
 	return (flag);
 }
 
-static char	*get_static_token(char **line)
+static char	*get_redirect_token(char **line)
 {
 	char	*token;
 
@@ -55,28 +49,67 @@ static char	*get_static_token(char **line)
 		token = ft_strndup_move("<", 1, line);
 	else if (!ft_strncmp(*line, ">", 1))
 		token = ft_strndup_move(">", 1, line);
-	else if (!ft_strncmp(*line, "&&", 2))
-		token = ft_strndup_move("&&", 2, line);
-	else if (!ft_strncmp(*line, "||", 2))
-		token = ft_strndup_move("||", 2, line);
-	else if (!ft_strncmp(*line, "|", 1))
-		token = ft_strndup_move("|", 1, line);
 	return (token);
 }
 
-static char	*get_token(char **line)
+static char	*get_pipe_ctr_op_token(char **line, int *status)
+{
+	char	*token;
+
+	token = 0;
+	if (!ft_strncmp(*line, "&&", 2))
+	{
+		*status = LX_CTR_OP;
+		token = ft_strndup_move("&&", 2, line);
+	}
+	else if (!ft_strncmp(*line, "||", 2))
+	{
+		*status = LX_CTR_OP;
+		token = ft_strndup_move("||", 2, line);
+	}
+	else if (!ft_strncmp(*line, "|", 1))
+	{
+		*status = LX_PIPE;
+		token = ft_strndup_move("|", 1, line);
+	}
+	return (token);
+}
+
+char	*get_static_token(char **line, int *status)
+{
+	char	*token;
+
+	token = 0;
+	if (ft_strchr("<>", **line))
+	{
+		if (*status & LX_REDIRECT)
+			return ((char *)PARSE_UNEXPECT);
+		*status |= LX_REDIRECT;
+		return (get_redirect_token(line));
+	}
+	if (*status & ~LX_CMD)
+		return ((char *)PARSE_UNEXPECT);
+	if (ft_strchr("&|", **line))
+		return (get_pipe_ctr_op_token(line, status));
+	else if (!ft_strncmp(*line, ";", 1))
+	{
+		*status = LX_SEPERATOR;
+		token = ft_strndup_move(";", 1, line);
+	}
+	return (token);
+}
+
+char	*get_token(char **line)
 {
 	int		flag;
 	char	*token;
 	char	temp[2];
 
-	if (ft_strchr("<>|&;", **line))
-		return (get_static_token(line));
 	flag = TK_NONE;
-	token = ft_strdup("");
 	temp[1] = 0;
+	token = ft_strdup("");
 	if (token == NULL)
-		return (0);
+		return (PARSE_MALLOC);
 	while (**line && !(flag == TK_NONE && ft_strchr(" \n\t<>|&;", **line)))
 	{
 		flag = check_flag(flag, line);
@@ -89,33 +122,4 @@ static char	*get_token(char **line)
 	if (flag != TK_NONE)
 		return ((char *)ft_free_ret(token, (char *)PARSE_INVAILD));
 	return (token);
-}
-
-char	**tokenizer(char *line)
-{
-	t_list	*curr;
-	t_list	*token;
-
-	token = ft_lstnew(0);
-	if (token == NULL)
-		return (PARSE_MALLOC);
-	while (*line && ft_strchr(TK_IFS, *line))
-		++line;
-	curr = token;
-	while (*line)
-	{
-		curr->content = get_token(&line);
-		if (curr->content == (void *)PARSE_INVAILD)
-		{
-			curr->content = NULL;
-			return ((char **)free_tokenizer(token, (void *)PARSE_INVAILD));
-		}
-		curr->next = ft_lstnew(0);
-		if (curr->next == NULL || curr->content == NULL)
-			return ((char **)free_tokenizer(token, (void *)PARSE_MALLOC));
-		curr = curr->next;
-		while (*line && ft_strchr(TK_IFS, *line))
-			++line;
-	}
-	return ((char **)ft_lst_to_array(&token));
 }

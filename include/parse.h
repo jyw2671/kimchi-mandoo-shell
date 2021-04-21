@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/18 17:29:48 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/22 03:46:27 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "minishell.h"
 
+# define PARSE_ERROR	3
 # define PARSE_MALLOC	0
 # define PARSE_INVAILD	1
+# define PARSE_UNEXPECT	3
 
 t_list	*parse_line(char *line);
 char	*parse_cmd(char *cmd, char **envp);
