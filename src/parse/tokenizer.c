@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 20:24:25 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/22 02:41:36 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/22 23:02:00 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,14 @@ static int	check_flag(int flag, char **line)
 		if (**line == '"')
 			flag |= TK_QOUTES;
 	}
-	else if (!(flag & TK_ESCAPE))
-	{
-		if (**line == '\\')
-			flag |= TK_ESCAPE;
-		else if (flag & TK_QOUTE && **line == '\'')
-			flag ^= TK_QOUTE;
-		else if (flag & TK_QOUTES && **line == '"')
-			flag ^= TK_QOUTES;
-	}
-	else if (flag & TK_ESCAPE && *(*line - 1) == '\\')
-		flag ^= TK_ESCAPE;
+	else if (!(flag & TK_ESCAPE) && **line == '\\')
+		flag |= TK_ESCAPE;
+	else if (!(flag & TK_ESCAPE) && flag & TK_QOUTES && **line == '"')
+		flag &= ~TK_QOUTES;
+	else if (flag & TK_QOUTE && **line == '\'')
+			flag &= ~TK_QOUTE;
+	if (flag & TK_ESCAPE && *(*line - 1) == '\\')
+		flag &= ~TK_ESCAPE;
 	return (flag);
 }
 
@@ -84,14 +81,14 @@ char	*get_static_token(char **line, int *status)
 	{
 		if (*status & LX_REDIRECT)
 			return ((char *)PARSE_UNEXPECT);
-		*status |= LX_REDIRECT;
+		*status |= (LX_REDIRECT + LX_POSSIBLE);
 		return (get_redirect_token(line));
 	}
-	if (*status & ~LX_CMD)
+	if (*status == LX_NONE || *status & ~(LX_CMD + LX_POSSIBLE))
 		return ((char *)PARSE_UNEXPECT);
 	if (ft_strchr("&|", **line))
 		return (get_pipe_ctr_op_token(line, status));
-	else if (!ft_strncmp(*line, ";", 1))
+	if (!ft_strncmp(*line, ";", 1))
 	{
 		*status = LX_SEPERATOR;
 		token = ft_strndup_move(";", 1, line);
@@ -110,7 +107,8 @@ char	*get_token(char **line)
 	token = ft_strdup("");
 	if (token == NULL)
 		return (PARSE_MALLOC);
-	while (**line && !(flag == TK_NONE && ft_strchr(" \n\t<>|&;", **line)))
+	while (**line && !(flag == TK_NONE && \
+		(ft_strchr(" \n\t<>|;", **line) || !ft_strncmp("&&", *line, 2))))
 	{
 		flag = check_flag(flag, line);
 		temp[0] = **line;

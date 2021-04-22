@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 23:44:09 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/22 03:19:59 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/22 23:02:14 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static t_list	*destructor(t_list *result, void *err)
 
 static void	token_lexer(t_type *data, char **line, int *status)
 {
-	if (ft_strchr("<>|&;", **line))
+	if (ft_strchr("<>|;", **line) || !ft_strncmp("&&", *line, 2))
 	{
 		data->value = get_static_token(line, status);
 		if (*status & LX_REDIRECT)
 			data->type = LX_REDIRECT;
 		else
-			data->type = *status & ~LX_CMD;
+			data->type = *status & ~(LX_CMD + LX_POSSIBLE);
 	}
 	else
 	{
@@ -47,13 +47,13 @@ static void	token_lexer(t_type *data, char **line, int *status)
 		if (*status & LX_REDIRECT)
 		{
 			data->type = LX_FILE;
-			*status &= ~LX_REDIRECT;
+			*status = (*status & LX_CMD) | LX_POSSIBLE;
 		}
 		else if (*status & LX_CMD)
 			data->type = LX_ARG;
 		else
 		{
-			*status = (*status & LX_REDIRECT) + LX_CMD;
+			*status = LX_CMD;
 			data->type = LX_CMD;
 		}
 	}
@@ -84,7 +84,7 @@ t_list	*lexical_analyzer(char *line)
 	int		status;
 	char	*err;
 
-	status = 0;
+	status = LX_NONE;
 	if (!ft_malloc((void **)&result, sizeof(t_list)))
 		return (PARSE_MALLOC);
 	skip_IFS(&line);
@@ -100,7 +100,7 @@ t_list	*lexical_analyzer(char *line)
 		curr = curr->next;
 		skip_IFS(&line);
 	}
-	if (status & ~LX_CMD)
+	if (status & ~(LX_CMD + LX_POSSIBLE))
 		return (destructor(result, (char *)PARSE_UNEXPECT));
 	return (result);
 }
