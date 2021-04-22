@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/22 03:43:52 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/22 23:01:58 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@
 # define TK_ESCAPE	4
 
 # define LX_NONE		0
-# define LX_CMD			1
-# define LX_ARG			2
-# define LX_REDIRECT	4
-# define LX_FILE		8
-# define LX_PIPE		16
-# define LX_CTR_OP		32
-# define LX_SEPERATOR	64
+# define LX_POSSIBLE	1
+# define LX_CMD			2
+# define LX_ARG			4
+# define LX_REDIRECT	8
+# define LX_FILE		16
+# define LX_PIPE		32
+# define LX_CTR_OP		64
+# define LX_SEPERATOR	128
 
 typedef struct s_type
 {
