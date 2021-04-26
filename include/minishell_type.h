@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/22 22:23:38 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/26 18:06:54 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ typedef struct s_ctr_op
 	int		type;
 	t_AST	*left;
 	t_AST	*right;
-}	t_con_op;
+}	t_ctr_op;
 
 #endif
