@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/26 18:06:54 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/26 22:17:17 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@
 ** FT_CMD -> t_cmd
 ** FT_PIPE -> t_pipe
 ** FT_REDIRECT -> t_redirect
-** FT_CONDITION -> t_cond
+** FT_CTR_OP -> t_ctr_op
 */
 
 # define FT_CMD			1
 # define FT_PIPE		2
 # define FT_REDIRECT	3
-# define FT_CONDITION	4
-# define FT_CTR_OP		5
+# define FT_CTR_OP		4
 
 typedef struct s_AST
 {
