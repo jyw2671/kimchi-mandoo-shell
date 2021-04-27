@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   print_AST_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/04/27 18:30:22 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/04/26 18:14:08 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/04/26 18:16:39 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parse_util.h"
 
-int	main(void)
+void	print_depth(int depth)
 {
-	t_list	*ASTs;
-
-	ASTs = parse_line(\
-		"echo -n \"This is an example\" | cat -e > file1 | cat < file1 > file2");
-	return (0);
+	while (depth--)
+		printf("\t");
 }

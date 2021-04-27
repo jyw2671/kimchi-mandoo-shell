@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strskip.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/04/27 18:30:22 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/04/27 13:25:14 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/04/27 13:29:39 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_strskip(char **str, char *charset)
 {
-	t_list	*ASTs;
-
-	ASTs = parse_line(\
-		"echo -n \"This is an example\" | cat -e > file1 | cat < file1 > file2");
-	return (0);
+	while (**str && ft_strchr(charset, **str))
+		++(*str);
 }

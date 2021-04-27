@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 20:24:25 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/22 23:02:00 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/27 17:37:50 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_flag(int flag, char **line)
 	else if (!(flag & TK_ESCAPE) && flag & TK_QOUTES && **line == '"')
 		flag &= ~TK_QOUTES;
 	else if (flag & TK_QOUTE && **line == '\'')
-			flag &= ~TK_QOUTE;
+		flag &= ~TK_QOUTE;
 	if (flag & TK_ESCAPE && *(*line - 1) == '\\')
 		flag &= ~TK_ESCAPE;
 	return (flag);
@@ -54,6 +54,8 @@ static char	*get_pipe_ctr_op_token(char **line, int *status)
 	char	*token;
 
 	token = 0;
+	if (*status == LX_NONE || *status & ~(LX_CMD + LX_POSSIBLE))
+		return ((char *)PARSE_UNEXPECT);
 	if (!ft_strncmp(*line, "&&", 2))
 	{
 		*status = LX_CTR_OP;
@@ -84,10 +86,10 @@ char	*get_static_token(char **line, int *status)
 		*status |= (LX_REDIRECT + LX_POSSIBLE);
 		return (get_redirect_token(line));
 	}
-	if (*status == LX_NONE || *status & ~(LX_CMD + LX_POSSIBLE))
-		return ((char *)PARSE_UNEXPECT);
 	if (ft_strchr("&|", **line))
 		return (get_pipe_ctr_op_token(line, status));
+	if (*status & ~(LX_CMD + LX_POSSIBLE))
+		return ((char *)PARSE_UNEXPECT);
 	if (!ft_strncmp(*line, ";", 1))
 	{
 		*status = LX_SEPERATOR;

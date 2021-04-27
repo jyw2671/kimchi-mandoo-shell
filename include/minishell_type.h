@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/18 17:47:58 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/26 22:17:17 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 ** FT_CMD -> t_cmd
 ** FT_PIPE -> t_pipe
 ** FT_REDIRECT -> t_redirect
-** FT_CONDITION -> t_cond
+** FT_CTR_OP -> t_ctr_op
 */
 
 # define FT_CMD			1
 # define FT_PIPE		2
 # define FT_REDIRECT	3
-# define FT_CONDITION	4
+# define FT_CTR_OP		4
 
 typedef struct s_AST
 {
@@ -36,7 +36,7 @@ typedef struct s_AST
 typedef struct s_cmd
 {
 	char	*cmd;
-	char	**args;
+	t_list	*args;
 }	t_cmd;
 
 typedef struct s_pipe
@@ -76,11 +76,11 @@ typedef struct s_redirect
 # define FT_OR	1
 # define FT_AND	2
 
-typedef struct s_con_op
+typedef struct s_ctr_op
 {
 	int		type;
 	t_AST	*left;
 	t_AST	*right;
-}	t_con_op;
+}	t_ctr_op;
 
 #endif

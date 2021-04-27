@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 23:44:09 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/22 23:02:14 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/27 17:40:04 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ static t_list	*destructor(t_list *result, void *err)
 
 	while (result)
 	{
-		if (result->content)
-		{
-			ft_free(((t_type *)result->content)->value);
-			ft_free(result->content);
-		}
+		ft_free(((t_token *)result->content)->value);
+		ft_free(result->content);
 		prev = result;
 		result = result->next;
 		free(prev);
@@ -31,7 +28,7 @@ static t_list	*destructor(t_list *result, void *err)
 	return (err);
 }
 
-static void	token_lexer(t_type *data, char **line, int *status)
+static void	token_lexer(t_token *data, char **line, int *status)
 {
 	if (ft_strchr("<>|;", **line) || !ft_strncmp("&&", *line, 2))
 	{
@@ -59,22 +56,32 @@ static void	token_lexer(t_type *data, char **line, int *status)
 	}
 }
 
-static void	skip_IFS(char **line)
+static int	check_token_lexer(t_list *curr, char **line, int *status, char **e)
 {
-	while (**line && ft_strchr(TK_IFS, **line))
-		++(*line);
-}
-
-static int	check_token_lexer(t_type *data, char **line, int *status, char **e)
-{
-	token_lexer(data, line, status);
-	if (data->value <= (char *)PARSE_ERROR)
+	if (!ft_malloc(&curr->content, sizeof(t_token)))
 	{
-		*e = data->value;
-		data->value = NULL;
+		*e = PARSE_MALLOC;
+		return (0);
+	}
+	token_lexer(curr->content, line, status);
+	if (((t_token *)curr->content)->value <= (char *)PARSE_ERROR)
+	{
+		*e = ((t_token *)curr->content)->value;
+		((t_token *)curr->content)->value = NULL;
 		return (0);
 	}
 	return (1);
+}
+
+static int	malloc_chk_tk_lx(t_list **curr, char **line, int *status, char **e)
+{
+	if (!ft_malloc((void **)&(*curr)->next, sizeof(t_list)))
+	{
+		*e = PARSE_MALLOC;
+		return (0);
+	}
+	(*curr) = (*curr)->next;
+	return (check_token_lexer(*curr, line, status, e));
 }
 
 t_list	*lexical_analyzer(char *line)
@@ -87,20 +94,18 @@ t_list	*lexical_analyzer(char *line)
 	status = LX_NONE;
 	if (!ft_malloc((void **)&result, sizeof(t_list)))
 		return (PARSE_MALLOC);
-	skip_IFS(&line);
 	curr = result;
+	ft_strskip(&line, TK_IFS);
+	if (!check_token_lexer(curr, &line, &status, &err))
+		return (destructor(result, err));
+	ft_strskip(&line, TK_IFS);
 	while (*line)
 	{
-		if (!ft_malloc(&curr->content, sizeof(t_type)))
-			return (destructor(result, PARSE_MALLOC));
-		if (!check_token_lexer(curr->content, &line, &status, &err))
+		if (!malloc_chk_tk_lx(&curr, &line, &status, &err))
 			return (destructor(result, err));
-		if (!ft_malloc((void **)&curr->next, sizeof(t_list)))
-			return (destructor(result, PARSE_MALLOC));
-		curr = curr->next;
-		skip_IFS(&line);
+		ft_strskip(&line, TK_IFS);
 	}
-	if (status & ~(LX_CMD + LX_POSSIBLE))
+	if (status != LX_SEPERATOR && status & ~(LX_CMD + LX_POSSIBLE))
 		return (destructor(result, (char *)PARSE_UNEXPECT));
 	return (result);
 }
