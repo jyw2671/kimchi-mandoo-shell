@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/22 23:01:58 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/27 17:29:42 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,27 @@
 # define LX_CTR_OP		64
 # define LX_SEPERATOR	128
 
-typedef struct s_type
+typedef struct s_token
 {
 	int		type;
 	char	*value;
-}	t_type;
+}	t_token;
 
 char	*get_token(char **line);
 char	*get_static_token(char **line, int *status);
 t_list	*lexical_analyzer(char *line);
+t_list	*syntax_analyzer(t_list *type);
+
+t_AST	*syntax_cmd(t_list **token);
+t_AST	*syntax_AST(t_list **token);
+
+void	free_AST(void *data);
+void	free_REDIRECT(t_redirect *redirect);
+void	free_CTR_OP(t_ctr_op *ctr);
+void	free_PIPE(t_pipe *pipe);
+void	free_CMD(t_cmd *cmd);
+
+void	print_AST(t_AST	*AST, int depth);
+void	print_depth(int depth);
 
 #endif
