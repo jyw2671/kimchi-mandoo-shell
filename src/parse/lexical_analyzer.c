@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 23:44:09 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/27 17:40:04 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/28 16:31:55 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	check_token_lexer(t_list *curr, char **line, int *status, char **e)
 		return (0);
 	}
 	token_lexer(curr->content, line, status);
-	if (((t_token *)curr->content)->value <= (char *)PARSE_ERROR)
+	if (((t_token *)curr->content)->value <= (char *)PARSE_ERROR_COUNT)
 	{
 		*e = ((t_token *)curr->content)->value;
 		((t_token *)curr->content)->value = NULL;
