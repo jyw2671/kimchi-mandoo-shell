@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 23:44:09 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/28 16:31:55 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/07 03:39:14 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,12 @@ t_list	*lexical_analyzer(char *line)
 	char	*err;
 
 	status = LX_NONE;
+	ft_strskip(&line, TK_IFS);
+	if (*line == '\0')
+		return ((t_list *)PARSE_NOTTHING);
 	if (!ft_malloc((void **)&result, sizeof(t_list)))
 		return (PARSE_MALLOC);
 	curr = result;
-	ft_strskip(&line, TK_IFS);
 	if (!check_token_lexer(curr, &line, &status, &err))
 		return (destructor(result, err));
 	ft_strskip(&line, TK_IFS);

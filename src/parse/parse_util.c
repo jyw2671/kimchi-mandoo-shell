@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 13:39:46 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/28 16:31:51 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/04/26 18:14:08 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/05/07 03:38:44 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parse_util.h"
 
-t_list	*parse_line(char *line)
+void	print_parse_err(t_list *err)
 {
-	t_list	*result;
+	if (err == (t_list *)PARSE_MALLOC)
+		ft_putstr_fd(PARSE_MALLOC_MSG, 2);
+	if (err == (t_list *)PARSE_UNEXPECT)
+		ft_putstr_fd(PARSE_UNEXPECT_MSG, 2);
+	if (err == (t_list *)PARSE_INVAILD)
+		ft_putstr_fd(PARSE_INVAILD_MSG, 2);
+}
 
-	result = lexical_analyzer(line);
-	if (result < (t_list *)PARSE_ERROR_COUNT)
-		return (result);
-	result = syntax_analyzer(result);
-	return (result);
+void	print_depth(int depth)
+{
+	while (depth--)
+		printf("\t");
 }

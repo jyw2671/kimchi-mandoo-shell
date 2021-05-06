@@ -6,12 +6,31 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/26 22:17:17 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/06 16:56:22 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_TYPE_H
 # define MINISHELL_TYPE_H
+
+typedef struct s_history
+{
+	char				*cmd;
+	char				*edit_cmd;
+	struct s_history	*next;
+	struct s_history	*prev;
+}	t_history;
+
+typedef struct s_minishell
+{
+	t_history		*cmd;
+	t_history		*history;
+	int				cmd_i;
+	int				cmd_s;
+	t_list			*env;
+	struct termios	term_sh;
+	struct termios	term_ori;
+}	t_minishell;
 
 /*
 ** t_AST type define
