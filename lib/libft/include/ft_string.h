@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 00:42:20 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/27 13:27:23 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/04/29 18:48:33 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char	*ft_convert_base(t_ll num, const char *base_set, int base);
 char	*ft_strjoin_free(char const *s1, char const *s2, int check);
 char	*ft_strndup_move(const char *s, size_t n, char **target);
 void	ft_strskip(char **str, char *charset);
+char	*ft_strappendc(char *str, char c);
 
 #endif
