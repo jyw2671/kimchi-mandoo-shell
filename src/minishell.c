@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parse_util.h"
 
 void	minishell(t_minishell *g)
 {
