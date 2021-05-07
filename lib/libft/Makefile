@@ -6,7 +6,7 @@
 #    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/24 20:10:49 by jaeskim           #+#    #+#              #
-#    Updated: 2021/04/27 13:27:37 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/04/29 18:48:51 by jaeskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SRC_STRING = $(addprefix $(SRC_STRING_DIR)/, \
 	ft_strjoin_free.c	\
 	ft_strndup_move.c	\
 	ft_strskip.c	\
+	ft_strappendc.c	\
 )
 
 SRC_TYPE_DIR = $(SRC_DIR)/type

@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 20:24:25 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/27 17:37:50 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/07 03:30:50 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*get_pipe_ctr_op_token(char **line, int *status)
 	char	*token;
 
 	token = 0;
-	if (*status == LX_NONE || *status & ~(LX_CMD + LX_POSSIBLE))
+	if (*status == LX_NONE || *status & ~(LX_CMD | LX_POSSIBLE))
 		return ((char *)PARSE_UNEXPECT);
 	if (!ft_strncmp(*line, "&&", 2))
 	{
@@ -83,12 +83,13 @@ char	*get_static_token(char **line, int *status)
 	{
 		if (*status & LX_REDIRECT)
 			return ((char *)PARSE_UNEXPECT);
-		*status |= (LX_REDIRECT + LX_POSSIBLE);
+		*status |= (LX_REDIRECT | LX_POSSIBLE);
 		return (get_redirect_token(line));
 	}
 	if (ft_strchr("&|", **line))
 		return (get_pipe_ctr_op_token(line, status));
-	if (*status & ~(LX_CMD + LX_POSSIBLE))
+	if (*status & ~(LX_CMD | LX_POSSIBLE) || \
+		!(*status & (LX_CMD | LX_POSSIBLE)))
 		return ((char *)PARSE_UNEXPECT);
 	if (!ft_strncmp(*line, ";", 1))
 	{

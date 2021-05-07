@@ -6,14 +6,15 @@
 #    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/04/18 16:17:31 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/05/06 15:19:17 by jaeskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
+CLIBFLAGS = -lncurses
 # CFLAGS += -g3 -fsanitize=address
 ifeq ($(DEBUG),true)
 	CFLAGS += -g
@@ -37,6 +38,12 @@ CFLAGS += -I $(LIBFT_INC_DIR)
 
 HEADERS = $(wildcard $(INC_DIR)/*.h)
 
+UTIL_DIR = $(SRC_DIR)/util
+UTIL_SRC = $(wildcard $(UTIL_DIR)/*.c)
+
+CUROSR_DIR = $(SRC_DIR)/cursor
+CUROSR_SRC = $(wildcard $(CUROSR_DIR)/*.c)
+
 PARSE_DIR = $(SRC_DIR)/parse
 PARSE_SRC = $(wildcard $(PARSE_DIR)/*.c)
 
@@ -46,12 +53,16 @@ EXEC_SRC = $(wildcard $(EXEC_DIR)/*.c)
 SRCS = \
 	$(wildcard $(SRC_DIR)/*.c)	\
 	$(PARSE_SRC)	\
-	$(EXEC_SRC)
+	$(EXEC_SRC)	\
+	$(UTIL_SRC)	\
+	$(CUROSR_SRC)
 
 vpath %.c \
 	$(SRC_DIR)	\
 	$(PARSE_DIR)	\
-	$(EXEC_DIR)
+	$(EXEC_DIR)	\
+	$(UTIL_DIR)	\
+	$(CUROSR_DIR)
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
@@ -94,7 +105,7 @@ $(OBJ_DIR)/%.o : %.c $(LIBFT_FILE) | $(OBJ_DIR)
 $(NAME) : $(LIBFT_FILE) $(HEADERS) $(OBJS)
 	@printf "$(LF)🚀 $(FG_TEXT)Successfully Created $(FG_TEXT_PRIMARY)$@'s Object files $(FG_TEXT)!"
 	@printf "$(CRLF)📚 $(FG_TEXT)Create $(FG_TEXT_PRIMARY)$@$(FG_TEXT)!\n"
-	@$(CC) $(CFLAGS) $(LIBFT_FLAGS) $(OBJS) -o $@
+	@$(CC) $(CFLAGS) $(CLIBFLAGS) $(LIBFT_FLAGS) $(OBJS) -o $@
 	@printf "$(LF)🎉 $(FG_TEXT)Successfully Created $(FG_TEXT_PRIMARY)$@ $(FG_TEXT)!\n$(NO_COLOR)"
 
 # lib

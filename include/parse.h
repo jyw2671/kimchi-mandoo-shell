@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/28 16:18:47 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/07 03:38:24 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,24 @@
 
 # include "minishell.h"
 
-# define PARSE_ERROR_COUNT	3
+# define PARSE_ERROR_COUNT	4
 # define PARSE_MALLOC		0
 # define PARSE_MALLOC_MSG	"Memory allocation failure\n"
 # define PARSE_INVAILD		1
-# define PARSE_INVAILD_MSG	"Invaild command\n"
+# define PARSE_INVAILD_MSG	"invaild command\n"
 # define PARSE_UNEXPECT		2
 # define PARSE_UNEXPECT_MSG	"syntax error near unexpected token\n"
+# define PARSE_NOTTHING		3
 
 t_list	*parse_line(char *line);
-char	*parse_cmd(char *cmd, char **envp);
-char	*parse_arg(char *arg, char **envp);
+char	*parse_cmd(char *cmd, t_list *envp);
+char	*parse_arg(char *arg, t_list *envp);
+
+void	print_parse_err(t_list *err);
+void	free_AST(void *data);
+void	free_REDIRECT(t_redirect *redirect);
+void	free_CTR_OP(t_ctr_op *ctr);
+void	free_PIPE(t_pipe *pipe);
+void	free_CMD(t_cmd *cmd);
 
 #endif
