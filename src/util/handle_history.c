@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:46:14 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 01:52:28 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/07 23:50:17 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char	*handle_history(t_minishell *g, char *line, int keycode)
 {
 	char	*result;
 
-	if (keycode == ARROW_UP && \
-		g->cmd == g->history && !g->cmd->next && g->cmd->cmd)
+	if (keycode == ARROW_UP && !g->history->next && \
+		!g->cmd->next && g->cmd->cmd)
 		handle_history_prev_new(g, line);
 	else if (keycode == ARROW_UP && handle_history_prev(g, line))
 		return (line);
