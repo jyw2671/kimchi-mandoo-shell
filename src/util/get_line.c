@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:19:08 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 01:54:16 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 18:45:07 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,23 @@ static char	*append_char(t_minishell *g, char *line, char c)
 	return (result);
 }
 
-char	*setup_line(t_minishell *g, char *line)
+static char	*setup_line_empty_cmd(t_minishell *g, char *line)
+{
+	ft_free(g->cmd->edit_cmd);
+	g->cmd->edit_cmd = NULL;
+	ft_free(g->history->edit_cmd);
+	g->history->edit_cmd = NULL;
+	g->cmd->cmd = line;
+	g->history = g->cmd;
+	return (line);
+}
+
+static char	*setup_line(t_minishell *g, char *line)
 {
 	t_history	*history;
 
 	if (g->cmd && g->cmd->cmd == NULL)
-	{
-		g->cmd->cmd = line;
-		g->history = g->cmd;
-		return (line);
-	}
+		return (setup_line_empty_cmd(g, line));
 	if (!ft_malloc((void **)&history, sizeof(t_history)))
 	{
 		ft_putstr_fd(strerror(errno), 2);
@@ -94,9 +101,7 @@ char	*get_line(t_minishell *g)
 	while (c != (int) '\n')
 	{
 		if (is_special_key(c))
-		{
 			line = handle_key_input(g, c, line);
-		}
 		else
 		{
 			line = append_char(g, line, c);

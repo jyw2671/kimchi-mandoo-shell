@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 01:55:18 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/07 23:19:37 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define ARROW_LEFT		4479771
 # define ARROW_RIGHT	4414235
 # define DELETE			127
+# define EOF_CHAR		'\4'
 
 # define PS1	"minishell>"
 
