@@ -6,7 +6,7 @@
 #    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/05/06 15:19:17 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/05/08 23:19:28 by jaeskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ HEADERS = $(wildcard $(INC_DIR)/*.h)
 UTIL_DIR = $(SRC_DIR)/util
 UTIL_SRC = $(wildcard $(UTIL_DIR)/*.c)
 
-CUROSR_DIR = $(SRC_DIR)/cursor
-CUROSR_SRC = $(wildcard $(CUROSR_DIR)/*.c)
+CURSOR_DIR = $(SRC_DIR)/cursor
+CURSOR_SRC = $(wildcard $(CURSOR_DIR)/*.c)
 
 PARSE_DIR = $(SRC_DIR)/parse
 PARSE_SRC = $(wildcard $(PARSE_DIR)/*.c)
@@ -50,19 +50,24 @@ PARSE_SRC = $(wildcard $(PARSE_DIR)/*.c)
 EXEC_DIR = $(SRC_DIR)/exec
 EXEC_SRC = $(wildcard $(EXEC_DIR)/*.c)
 
+BUILTIN_DIR = $(SRC_DIR)/builtin
+BUILTIN_SRC = $(wildcard $(BUILTIN_DIR)/*.c)
+
 SRCS = \
 	$(wildcard $(SRC_DIR)/*.c)	\
 	$(PARSE_SRC)	\
 	$(EXEC_SRC)	\
 	$(UTIL_SRC)	\
-	$(CUROSR_SRC)
+	$(CURSOR_SRC)	\
+	$(BUILTIN_SRC)
 
 vpath %.c \
 	$(SRC_DIR)	\
 	$(PARSE_DIR)	\
 	$(EXEC_DIR)	\
 	$(UTIL_DIR)	\
-	$(CUROSR_DIR)
+	$(CURSOR_DIR)	\
+	$(BUILTIN_DIR)
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
@@ -114,21 +119,21 @@ lib : $(LIBFT)
 lib_re : $(LIBFT)_re
 
 # libft
-$(LIBFT) : $(LIBFT_FILE)
+libft : $(LIBFT_FILE)
 
 $(LIBFT_FILE) :
 	@make --no-print-directory -C $(LIBFT_DIR)
 
-$(LIBFT)_re :
+libft_re :
 	@make --no-print-directory -C $(LIBFT_DIR) re
 
-$(LIBFT)_clean :
+libft_clean :
 	@make --no-print-directory -C $(LIBFT_DIR) clean
 
-$(LIBFT)_fclean :
+libft_fclean :
 	@make --no-print-directory -C $(LIBFT_DIR) fclean
 
 
 .PHONY: all clean fclean re test \
 	lib lib_re	\
-	$(LIBFT) $(LIBFT)_clean $(LIBFT)_fclean
+	libft libft_re libft_clean libft_fclean

@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "functional": "c",
+    "minishell.h": "c",
+    "unistd.h": "c"
+  }
+}

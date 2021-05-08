@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 18:09:22 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/03 16:01:22 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 23:22:35 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ void	print_AST(t_AST	*AST, int depth)
 		print_CTR_OP(AST->data, depth);
 	else if (AST->type == FT_REDIRECT)
 		print_REDIRECT(AST->data, depth);
+	ft_putstr_fd(NO_COLOR, 1);
 }

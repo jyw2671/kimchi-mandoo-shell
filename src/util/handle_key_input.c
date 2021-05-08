@@ -6,67 +6,67 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:57:48 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 18:31:25 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 23:51:42 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*handle_key_delete(t_minishell *g, char *line)
+static char	*handle_key_delete(char *line)
 {
 	char	*new_line;
 	char	*new_line_front;
 
-	new_line_front = ft_strndup(line, g->cmd_i - 1);
+	new_line_front = ft_strndup(line, g_sh.cmd_i - 1);
 	if (new_line_front == NULL)
 		return (0);
-	if (g->cmd_i != g->cmd_s)
-		new_line = ft_strjoin_free(new_line_front, line + g->cmd_i, 1);
+	if (g_sh.cmd_i != g_sh.cmd_s)
+		new_line = ft_strjoin_free(new_line_front, line + g_sh.cmd_i, 1);
 	else
 		new_line = new_line_front;
-	--g->cmd_i;
-	--g->cmd_s;
+	--g_sh.cmd_i;
+	--g_sh.cmd_s;
 	cursor_left();
 	delete_char();
 	ft_free(line);
 	return (new_line);
 }
 
-static void	handle_key_move(t_minishell *g, int keycode)
+static void	handle_key_move(int keycode)
 {
-	if (g->cmd_i > 0 && keycode == ARROW_LEFT)
+	if (g_sh.cmd_i > 0 && keycode == ARROW_LEFT)
 	{
 		cursor_left();
-		--g->cmd_i;
+		--g_sh.cmd_i;
 	}
-	else if (g->cmd_i < g->cmd_s && keycode == ARROW_RIGHT)
+	else if (g_sh.cmd_i < g_sh.cmd_s && keycode == ARROW_RIGHT)
 	{
 		cursor_right();
-		++g->cmd_i;
+		++g_sh.cmd_i;
 	}
 }
 
-char	*handle_key_input(t_minishell *g, int keycode, char *line)
+void	handle_key_input(int keycode)
 {
-	if (g->cmd && is_arrow_up_down(keycode))
-		return (handle_history(g, line, keycode));
-	if (is_delete(keycode) && g->cmd_i > 0)
+	if (g_sh.cmd && is_arrow_up_down(keycode))
+		return (handle_history(keycode));
+	if (is_delete(keycode) && g_sh.cmd_i > 0)
 	{
-		line = handle_key_delete(g, line);
-		if (line == NULL)
+		g_sh.line = handle_key_delete(g_sh.line);
+		if (g_sh.line == NULL)
 		{
 			ft_putstr_fd(strerror(errno), 2);
-			exit_minishell(g, 1);
+			exit_minishell(1);
 		}
-		return (line);
+		return ;
 	}
-	if (is_eof(keycode) && (line == NULL || !*line))
+	if (is_eof(keycode) && (g_sh.line == NULL || !*g_sh.line))
 	{
-		ft_free(line);
+		ft_free(g_sh.line);
 		ft_putstr_fd("exit\n", 2);
-		exit_minishell(g, 0);
+		exit_minishell(0);
 	}
 	if (is_arrow_left_right(keycode))
-		handle_key_move(g, keycode);
-	return (line);
+		handle_key_move(keycode);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 23:19:37 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 23:52:08 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "exec.h"
 # include "util.h"
 # include "cursor.h"
+# include "builtin.h"
 
 # define TERM_ERROR	"Specify a terminal type with `setenv TERM <yourtype>'.\n"
 # define TERM_SUCCES_ERR	"Could not access the termcap data base.\n"
@@ -43,7 +44,9 @@
 
 # define PS1	"minishell>"
 
-void	exit_minishell(t_minishell *g, int exitcode);
-void	init_minishell(t_minishell *g, char *envp[]);
+extern t_minishell	g_sh;
+
+void	exit_minishell(int exitcode);
+void	init_minishell(char *envp[]);
 
 #endif

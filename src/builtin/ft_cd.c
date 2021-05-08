@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_to_array.c                                  :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 15:14:51 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 20:43:23 by yjung            ###   ########.fr       */
+/*   Created: 2021/04/26 21:13:05 by yjung             #+#    #+#             */
+/*   Updated: 2021/05/08 20:45:25 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	**ft_lst_to_array(t_list *lst)
+int	ft_cd(t_check *g, t_list *args, t_list **envp)
 {
-	int		i;
-	t_list	*tmp;
-	void	**result;
+	int		status;
+	char	*path;
 
-	result = malloc(sizeof(void *) * (ft_lstsize(lst) + 1));
-	if (result == NULL)
-		return (0);
-	i = 0;
-	while (lst)
+	// TODO: 구현 필요
+	(void)g;
+	(void)args;
+	(void)envp;
+	status = 0;
+	status = chdir(path);
+	if (status < 0)
 	{
-		result[i++] = (lst)->content;
-		tmp = lst;
-		lst = lst->next;
-		free(lst);
+		ft_error_print("cd", strerror(errno));
+		return (1);
 	}
-	result[i] = 0;
-	return (result);
+	// ft_cmd_check();
+	return (status);
 }

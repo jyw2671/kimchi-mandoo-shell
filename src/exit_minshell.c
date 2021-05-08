@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 01:29:10 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 23:27:18 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 23:45:22 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	free_cmd_history(t_history	*cmd)
 	}
 }
 
-void	exit_minishell(t_minishell *g, int exitcode)
+void	exit_minishell(int exitcode)
 {
-	ft_lstclear(&g->env, ft_free);
-	free_cmd_history(g->cmd);
+	ft_lstclear(&g_sh.env, ft_free);
+	free_cmd_history(g_sh.cmd);
 	exit(exitcode);
 }
