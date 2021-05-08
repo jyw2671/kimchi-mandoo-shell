@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:59:24 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 01:58:35 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 18:31:20 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ int	is_delete(int keycode)
 	return (0);
 }
 
+int	is_eof(int keycode)
+{
+	if (keycode == EOF_CHAR)
+		return (1);
+	return (0);
+}
+
 int	is_special_key(int keycode)
 {
 	if (is_arrow_left_right(keycode) || \
 		is_arrow_up_down(keycode) || \
-		is_delete(keycode))
+		is_delete(keycode) || \
+		is_eof(keycode) || \
+		keycode == '\t')
 		return (1);
 	return (0);
 }

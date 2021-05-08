@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:10:22 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 01:57:21 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/07 23:23:03 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void	init_termcap(t_minishell *g)
 	char	*termtype;
 	int		success;
 
-	termtype = getenv ("TERM");
+	termtype = getenv("TERM");
 	if (termtype == 0)
 	{
 		ft_putstr_fd(TERM_ERROR, 2);
 		exit_minishell(g, 1);
 	}
-	success = tgetent (NULL, termtype);
+	success = tgetent(NULL, termtype);
 	if (success < 0)
 	{
 		ft_putstr_fd(TERM_SUCCES_ERR, 2);
@@ -47,6 +47,7 @@ static void	init_term(t_minishell *g)
 	}
 	g->term_sh = g->term_ori;
 	g->term_sh.c_lflag &= ~(ICANON | ECHO);
+	g->term_sh.c_lflag |= VEOF;
 	g->term_sh.c_cc[VMIN] = 1;
 	g->term_sh.c_cc[VTIME] = 0;
 }
@@ -81,4 +82,5 @@ void	init_minishell(t_minishell *g, char *envp[])
 	init_envp(g, envp);
 	init_term(g);
 	init_termcap(g);
+	set_handle_signal();
 }
