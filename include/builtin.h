@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_util.c                                       :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/26 18:14:08 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 03:38:44 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/05/08 23:02:36 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/05/08 23:18:09 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parse_util.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-void	print_parse_err(t_list *err)
-{
-	if (err == (t_list *)PARSE_MALLOC)
-		ft_putstr_fd(PARSE_MALLOC_MSG, 2);
-	if (err == (t_list *)PARSE_UNEXPECT)
-		ft_putstr_fd(PARSE_UNEXPECT_MSG, 2);
-	if (err == (t_list *)PARSE_INVAILD)
-		ft_putstr_fd(PARSE_INVAILD_MSG, 2);
-}
+# include "minishell.h"
 
-void	print_depth(int depth)
-{
-	while (depth--)
-		printf("\t");
-}
+int		ft_echo(t_check *g, t_list *args, t_list **envp);
+int		ft_cd(t_check *g, t_list *args, t_list **envp);
+int		ft_export(t_list *args, t_list **envp);
+int		ft_unset(t_check *g, t_list *args, t_list **envp);
+int		ft_env(t_list **envp);
+int		ft_pwd(t_check *g);
+
+#endif
