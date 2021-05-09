@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/05/09 14:36:09 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/05/09 15:48:58 by yjung            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ HEADERS = $(wildcard $(INC_DIR)/*.h)
 UTIL_DIR = $(SRC_DIR)/util
 UTIL_SRC = $(wildcard $(UTIL_DIR)/*.c)
 
-CUROSR_DIR = $(SRC_DIR)/cursor
-CUROSR_SRC = $(wildcard $(CUROSR_DIR)/*.c)
+CURSOR_DIR = $(SRC_DIR)/cursor
+CURSOR_SRC = $(wildcard $(CURSOR_DIR)/*.c)
 
 PARSE_DIR = $(SRC_DIR)/parse
 PARSE_SRC = $(wildcard $(PARSE_DIR)/*.c)
@@ -53,13 +53,17 @@ EXEC_SRC = $(wildcard $(EXEC_DIR)/*.c)
 ENVP_DIR = $(SRC_DIR)/envp
 ENVP_SRC = $(wildcard $(ENVP_DIR)/*.c)
 
+BUILTIN_DIR = $(SRC_DIR)/builtin
+BUILTIN_SRC = $(wildcard $(BUILTIN_DIR)/*.c)
+
 SRCS = \
 	$(wildcard $(SRC_DIR)/*.c)	\
 	$(PARSE_SRC)	\
 	$(EXEC_SRC)	\
 	$(UTIL_SRC)	\
 	$(CUROSR_SRC)	\
-	$(ENVP_SRC)
+	$(ENVP_SRC)	\
+	$(BUILTIN_SRC)
 
 vpath %.c \
 	$(SRC_DIR)	\
@@ -67,7 +71,8 @@ vpath %.c \
 	$(EXEC_DIR)	\
 	$(UTIL_DIR)	\
 	$(CUROSR_DIR)	\
-	$(ENVP_DIR)
+	$(ENVP_DIR)	\
+	$(BUILTIN_DIR)
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
@@ -136,4 +141,4 @@ libft_fclean :
 
 .PHONY: all clean fclean re test \
 	lib lib_re	\
-	libft libft_clean libft_fclean
+	libft libft_re libft_clean libft_fclean
