@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getch.c                                            :+:      :+:    :+:   */
+/*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/29 18:12:38 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 14:48:43 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/05/09 12:22:59 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/05/09 15:33:56 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parse_util.h"
 
-int	getch(void)
+// TODO: parse_cmd $PATH check, `~` check needs.
+char	*parse_cmd(char *cmd)
 {
-	int	c;
+	char	*nomal_cmd;
 
-	c = 0;
-	tcsetattr(STDIN_FILENO, TCSANOW, &g_sh.term_sh);
-	read(STDIN_FILENO, &c, sizeof(c));
-	tcsetattr(STDIN_FILENO, TCSANOW, &g_sh.term_ori);
-	return (c);
+	nomal_cmd = normalize(cmd, NOMALIZE_CMD);
+	if (nomal_cmd == NULL)
+		return (PARSE_MALLOC);
+	if (!ft_strncmp(nomal_cmd, "./", 2) || !ft_strncmp(nomal_cmd, "/", 1))
+		return (nomal_cmd);
+	if (!ft_strncmp(nomal_cmd, "~/", 2))
+		return (nomal_cmd);
+	return (nomal_cmd);
 }

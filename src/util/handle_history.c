@@ -6,72 +6,69 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:46:14 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 23:50:17 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 23:46:26 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_history_prev_new(t_minishell *g, char *line)
+static void	handle_history_prev_new(void)
 {
-	if (!ft_malloc((void **)&g->cmd->next, sizeof(t_history)))
+	if (!ft_malloc((void **)&g_sh.cmd->next, sizeof(t_history)))
 	{
 		ft_putstr_fd(strerror(errno), 2);
-		ft_free(line);
-		exit_minishell(g, 1);
+		ft_free(g_sh.line);
+		exit_minishell(1);
 	}
-	ft_free(g->cmd->next->edit_cmd);
-	g->cmd->next->edit_cmd = line;
-	g->cmd->next->prev = g->cmd;
-	g->cmd = g->cmd->next;
-	g->history = g->cmd->prev;
+	ft_free(g_sh.cmd->next->edit_cmd);
+	g_sh.cmd->next->edit_cmd = g_sh.line;
+	g_sh.cmd->next->prev = g_sh.cmd;
+	g_sh.cmd = g_sh.cmd->next;
+	g_sh.history = g_sh.cmd->prev;
 }
 
-static int	handle_history_prev(t_minishell *g, char *line)
+static int	handle_history_prev(void)
 {
-	if (g->history->prev == NULL)
+	if (g_sh.history->prev == NULL)
 		return (1);
-	ft_free(g->history->edit_cmd);
-	g->history->edit_cmd = line;
-	g->history = g->history->prev;
+	ft_free(g_sh.history->edit_cmd);
+	g_sh.history->edit_cmd = g_sh.line;
+	g_sh.history = g_sh.history->prev;
 	return (0);
 }
 
-static int	handle_history_next(t_minishell *g, char *line)
+static int	handle_history_next(void)
 {
-	if (g->history->next == NULL)
+	if (g_sh.history->next == NULL)
 		return (1);
-	ft_free(g->history->edit_cmd);
-	g->history->edit_cmd = line;
-	g->history = g->history->next;
+	ft_free(g_sh.history->edit_cmd);
+	g_sh.history->edit_cmd = g_sh.line;
+	g_sh.history = g_sh.history->next;
 	return (0);
 }
 
-char	*handle_history(t_minishell *g, char *line, int keycode)
+void	handle_history(int keycode)
 {
-	char	*result;
-
-	if (keycode == ARROW_UP && !g->history->next && \
-		!g->cmd->next && g->cmd->cmd)
-		handle_history_prev_new(g, line);
-	else if (keycode == ARROW_UP && handle_history_prev(g, line))
-		return (line);
-	else if (keycode == ARROW_DOWN && handle_history_next(g, line))
-		return (line);
+	if (keycode == ARROW_UP && !g_sh.history->next && \
+		!g_sh.cmd->next && g_sh.cmd->cmd)
+		handle_history_prev_new();
+	else if (keycode == ARROW_UP && handle_history_prev())
+		return ;
+	else if (keycode == ARROW_DOWN && handle_history_next())
+		return ;
 	delete_line();
 	print_PS1();
-	if (g->history->edit_cmd)
-		result = g->history->edit_cmd;
+	if (g_sh.history->edit_cmd)
+		g_sh.line = g_sh.history->edit_cmd;
 	else
-		result = g->history->cmd;
-	g->cmd_s = ft_strlen(result);
-	g->cmd_i = g->cmd_s;
-	ft_putstr_fd(result, 1);
-	result = ft_strdup(result);
-	if (result == NULL)
+		g_sh.line = g_sh.history->cmd;
+	g_sh.cmd_s = ft_strlen(g_sh.line);
+	g_sh.cmd_i = g_sh.cmd_s;
+	ft_putstr_fd(g_sh.line, 1);
+	g_sh.line = ft_strdup(g_sh.line);
+	if (g_sh.line == NULL)
 	{
 		ft_putstr_fd(strerror(errno), 2);
-		exit_minishell(g, 1);
+		exit_minishell(1);
 	}
-	return (result);
 }

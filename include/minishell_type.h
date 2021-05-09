@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/06 16:56:22 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 14:23:57 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ typedef struct s_history
 
 typedef struct s_minishell
 {
+	int				status;
+	char			*line;
 	t_history		*cmd;
 	t_history		*history;
 	int				cmd_i;
 	int				cmd_s;
-	t_list			*env;
+	t_list			*envp;
 	struct termios	term_sh;
 	struct termios	term_ori;
 }	t_minishell;

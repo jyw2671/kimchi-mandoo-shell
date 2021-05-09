@@ -6,21 +6,21 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:19:08 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 18:45:07 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 23:51:42 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*append_char_malloc(t_minishell *g, char *line, char c)
+static char	*append_char_malloc(char *line, char c)
 {
 	char	*result;
 
 	if (line == NULL)
 		return (ft_strndup(&c, 1));
-	if (g->cmd_i == g->cmd_s)
+	if (g_sh.cmd_i == g_sh.cmd_s)
 		return (ft_strappendc(line, c));
-	result = ft_strndup(line, g->cmd_i);
+	result = ft_strndup(line, g_sh.cmd_i);
 	if (result == NULL)
 	{
 		ft_free(line);
@@ -32,87 +32,78 @@ static char	*append_char_malloc(t_minishell *g, char *line, char c)
 		ft_free(line);
 		return (NULL);
 	}
-	result = ft_strjoin_free(result, line + g->cmd_i, 1);
+	result = ft_strjoin_free(result, line + g_sh.cmd_i, 1);
 	ft_free(line);
 	if (result == NULL)
 		return (0);
 	return (result);
 }
 
-static char	*append_char(t_minishell *g, char *line, char c)
+static char	*append_char(char *line, char c)
 {
 	int		i;
 	char	*result;
 
-	result = append_char_malloc(g, line, c);
+	result = append_char_malloc(line, c);
 	if (result == NULL)
 		return (NULL);
-	ft_putstr_fd(result + g->cmd_i, 1);
-	i = g->cmd_s - g->cmd_i;
+	ft_putstr_fd(result + g_sh.cmd_i, 1);
+	i = g_sh.cmd_s - g_sh.cmd_i;
 	while (i--)
 		cursor_left();
-	(++g->cmd_i && ++g->cmd_s);
+	(++g_sh.cmd_i && ++g_sh.cmd_s);
 	return (result);
 }
 
-static char	*setup_line_empty_cmd(t_minishell *g, char *line)
-{
-	ft_free(g->cmd->edit_cmd);
-	g->cmd->edit_cmd = NULL;
-	ft_free(g->history->edit_cmd);
-	g->history->edit_cmd = NULL;
-	g->cmd->cmd = line;
-	g->history = g->cmd;
-	return (line);
-}
-
-static char	*setup_line(t_minishell *g, char *line)
+void	setup_line(void)
 {
 	t_history	*history;
 
-	if (g->cmd && g->cmd->cmd == NULL)
-		return (setup_line_empty_cmd(g, line));
+	if (g_sh.cmd && g_sh.cmd->cmd == NULL)
+	{
+		g_sh.cmd->cmd = g_sh.line;
+		g_sh.history = g_sh.cmd;
+		return ;
+	}
 	if (!ft_malloc((void **)&history, sizeof(t_history)))
 	{
 		ft_putstr_fd(strerror(errno), 2);
-		ft_free(line);
-		exit_minishell(g, 1);
+		ft_free(g_sh.line);
+		exit_minishell(1);
 	}
-	history->cmd = line;
-	if (g->cmd == NULL)
-		g->cmd = history;
+	history->cmd = g_sh.line;
+	if (g_sh.cmd == NULL)
+		g_sh.cmd = history;
 	else
 	{
-		g->cmd->next = history;
-		history->prev = g->cmd;
-		g->cmd = history;
+		g_sh.cmd->next = history;
+		history->prev = g_sh.cmd;
+		g_sh.cmd = history;
 	}
-	g->history = g->cmd;
-	return (line);
+	g_sh.history = g_sh.cmd;
 }
 
-char	*get_line(t_minishell *g)
+void	get_line(void)
 {
-	char	*line;
 	int		c;
 
-	(!(line = 0) && !(g->cmd_i = 0) && (g->cmd_s = 0));
-	c = getch(g);
+	(!(g_sh.line = 0) && !(g_sh.cmd_i = 0) && (g_sh.cmd_s = 0));
+	c = getch();
 	while (c != (int) '\n')
 	{
 		if (is_special_key(c))
-			line = handle_key_input(g, c, line);
+			handle_key_input(c);
 		else
 		{
-			line = append_char(g, line, c);
-			if (line == NULL)
+			g_sh.line = append_char(g_sh.line, c);
+			if (g_sh.line == NULL)
 			{
 				ft_putstr_fd(strerror(errno), 2);
-				exit_minishell(g, 1);
+				exit_minishell(1);
 			}
 		}
-		c = getch(g);
+		c = getch();
 	}
 	ft_putchar_fd('\n', 1);
-	return (setup_line(g, line));
+	setup_line();
 }
