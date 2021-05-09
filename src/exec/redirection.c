@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 00:02:29 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 15:57:21 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,18 @@ int	ft_redir_parser(t_check *g)
 	int	status;
 
 	status = 0;
-	status = ft_redir_connect(g);
+	if ((g->fd_in != 0 && g->save_in == -1) || (g->fd_out != 1 && g->save_out == -1))
+	{
+		status = ft_redir_connect(g);
+		return (status);
+	}
 	if (status < 0)
 		return (status);
 	status = ft_redir_close(g);
 	return (status);
 }
 
-int	ft_redir_exec(t_redirect *redir, t_list **envp, t_check *g)
+int	ft_redir_exec(t_redirect *redir, t_check *g)
 {
 	int	status;
 
@@ -98,6 +102,6 @@ int	ft_redir_exec(t_redirect *redir, t_list **envp, t_check *g)
 	else if (!redir->AST)
 		return (0);
 	else
-		status = ft_tree_parser(redir->AST, envp, g);
+		status = ft_tree_parser(redir->AST, g);
 	return (status);
 }

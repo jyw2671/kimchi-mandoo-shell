@@ -6,18 +6,17 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:06:12 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/08 20:46:58 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/09 15:59:29 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_check *g, t_list *args, t_list **envp)
+int	ft_echo(t_check *g, t_list *args)
 {
 	int	status;
 
 	(void)g;
-	(void)envp;
 	status = 0;
 	// -n 옵션은 라인 끝에서 new line 을 제외시킨다
 	if (ft_strcmp(args->content, "-n") == 0)

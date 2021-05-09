@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:45:21 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 23:23:33 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 15:58:23 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_cmd(t_list *ASTs, t_list **envp)
+int	exec_cmd(t_list *ASTs)
 {
 	int		status;
 	t_check	g;
@@ -23,7 +23,7 @@ int	exec_cmd(t_list *ASTs, t_list **envp)
 		ft_memset(&g, 0, sizeof(t_check));
 		g.save_in = -1;
 		g.save_out = -1;
-		status = ft_tree_parser(ASTs->content, envp, &g);
+		status = ft_tree_parser(ASTs->content, &g);
 		if (status != 0)
 			return (status);
 		ASTs = ASTs->next;

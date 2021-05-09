@@ -6,7 +6,7 @@
 #    By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/05/09 15:48:58 by yjung            ###   ########.fr        #
+#    Updated: 2021/05/09 16:09:21 by yjung            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRCS = \
 	$(PARSE_SRC)	\
 	$(EXEC_SRC)	\
 	$(UTIL_SRC)	\
-	$(CUROSR_SRC)	\
+	$(CURSOR_SRC)	\
 	$(ENVP_SRC)	\
 	$(BUILTIN_SRC)
 
@@ -70,7 +70,7 @@ vpath %.c \
 	$(PARSE_DIR)	\
 	$(EXEC_DIR)	\
 	$(UTIL_DIR)	\
-	$(CUROSR_DIR)	\
+	$(CURSOR_DIR)	\
 	$(ENVP_DIR)	\
 	$(BUILTIN_DIR)
 
