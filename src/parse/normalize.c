@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 13:37:29 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 15:09:27 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 16:52:28 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*normalize(char *token, int type)
 		return (NULL);
 	while (*token)
 	{
-		if (type == NOMALIZE_ARG && flag == TK_NONE && *result == '*')
+		if (type == NORMALIZE_ARG && flag == TK_NONE && *result == '*')
 			return (result);
 		if (!handle_flag(token, &flag))
 		{
