@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 00:25:27 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 16:21:32 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_pipe_connect(int *status, t_check *g)
 	if (g->pipe_cnt <= 0)
 		return ;
 	num = (g->pipe_fd)->content;
-	if (num && num->pi_in > 0)
+	if (num && num->pi_in > 0 && num->pi_out > 0)
 	{
 		*status = dup2(num->pi_in, STDOUT_FILENO);
 		// pipe의 pi_in 부분을 stdout에 복제해준다
@@ -66,10 +66,11 @@ void	ft_pipe_connect(int *status, t_check *g)
 			return ;
 		close(num->pi_out);
 		ft_lstdel_first(g->pipe_fd);
+		g->pipe_cnt--;
 	}
 }
 
-int	ft_pipe_exec(t_pipe	*pipes, t_list **envp, t_check *g)
+int	ft_pipe_exec(t_pipe	*pipes, t_check *g)
 {
 	int	status;
 
@@ -77,8 +78,8 @@ int	ft_pipe_exec(t_pipe	*pipes, t_list **envp, t_check *g)
 	status = ft_set_pipe(g);
 	if (status != 0)
 		return (status);
-	status = ft_tree_parser(pipes->left, envp, g);
+	status = ft_tree_parser(pipes->left, g);
 	if (status)
 		return (status);
-	return (ft_tree_parser(pipes->right, envp, g));
+	return (ft_tree_parser(pipes->right, g));
 }

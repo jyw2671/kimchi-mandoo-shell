@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/05/11 14:11:03 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/05/13 14:51:32 by yjung            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,16 +58,18 @@ SRCS = \
 	$(PARSE_SRC)	\
 	$(EXEC_SRC)	\
 	$(UTIL_SRC)	\
-	$(CUROSR_SRC)	\
-	$(ENVP_SRC)
+	$(CURSOR_SRC)	\
+	$(ENVP_SRC)	\
+	$(BUILTIN_SRC)
 
 vpath %.c \
 	$(SRC_DIR)	\
 	$(PARSE_DIR)	\
 	$(EXEC_DIR)	\
 	$(UTIL_DIR)	\
-	$(CUROSR_DIR)	\
-	$(ENVP_DIR)
+	$(CURSOR_DIR)	\
+	$(ENVP_DIR)	\
+	$(BUILTIN_DIR)
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 

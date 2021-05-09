@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 15:31:23 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/13 14:51:51 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	minishell(void)
 			print_AST(tmp->content, 0);
 			tmp = tmp->next;
 		}
+		exec_cmd(ASTs);
 		ft_lstclear(&ASTs, free_AST);
 	}
 }
