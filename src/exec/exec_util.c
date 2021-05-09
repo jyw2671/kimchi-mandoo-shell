@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:58:07 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 17:16:29 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/09 19:16:50 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,17 @@ int	ft_ctr_op_exec(t_ctr_op *ctr, t_check *g)
 	return (status);
 }
 
-// quotes 처리...
-// $ 치환...
-// link_list 연결 후 free
+int	parse_cmd_err_check(char *args)
+{
+	if ((int)args == PARSE_MALLOC)
+		ft_error_print(PARSE_MALLOC_MSG, strerror(errno));
+	else if ((int)args == PARSE_CMD_NONE)
+		ft_error_print(PARSE_CMD_NONE_MSG, strerror(errno));
+	else
+		return (0);
+	return (-1);
+}
+
 int	ft_make_cmd(char *cmd, t_list *lst)
 {
 	int		status;
@@ -62,23 +70,20 @@ int	ft_make_cmd(char *cmd, t_list *lst)
 		// TODO: 예외처리 필요
 		return (-1);
 	cnt = 0;
-	// // malloc fail -> PARSE_MALLOC;
-	// // command not found -> PARSE_CMD_NONE;
-	// parse_cmd(cmd);
-	// PARSE_CMD_NONE
-	// TODO: ls -> /bin/ls 등 경로 치환 필요
 	args[cnt++] = parse_cmd(normalize(cmd, NORMALIZE_CMD));
+	if (parse_cmd_err_check(args[0]) == -1)
+		return (-1);
 	curr = lst;
 	while (curr)
 	{
-		// TODO: args 환경변수로 치환 -> 따로 parse_arg함수 만들어서 할 예정(*처리 위해)
-		args[cnt++] = normalize(curr->content, NORMALIZE_CMD);
+		args[cnt] = normalize(curr->content, NORMALIZE_CMD);
+		if (parse_cmd_err_check(args[cnt++]) == -1)
+			return (-1);
 		curr = curr->next;
 	}
 	args[cnt] = NULL;
 	status = execve(args[0], args, (char **)ft_lst_to_array(g_sh.envp));
 	ft_lstclear(&lst, ft_free);
-	exit(status);
 	return (status);
 }
 
@@ -105,16 +110,12 @@ int	ft_cmd_fork_set(t_cmd *cmds, t_check *g)
 		status = ft_redir_parser(g);
 		exit(status);
 	}
-	// else if (pid > 0)
 	else
 	{
 		wait(&pid);
 		// ft_pipe_connect(&status, g);
 		// if (status < 0)
 		// 	return (status);
-		// status = ft_redir_parser(g);
 	}
-	// else
-	// 	ft_error_print("fail fork", strerror(errno));
 	return (status);
 }

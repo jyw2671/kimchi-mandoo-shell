@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 22:26:53 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 16:21:51 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/09 18:33:55 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ int	ft_cmd_pipe_set(t_cmd *cmds, t_check *g)
 	else
 	{
 		wait(&pid);
-		// ft_pipe_connect(&status, g);
-		// if (status < 0)
-		// 	return (status);
-		// status = ft_redir_parser(g);
+		ft_pipe_connect(&status, g);
+		if (status < 0)
+			return (status);
 	}
 	return (status);
 }
@@ -51,6 +50,7 @@ int	ft_cmd_exec(t_cmd *cmds, t_check *g)
 	int	 status;
 
 	status = 0;
+	// TODO: cd를 제외한 나머지 fork()
 	if (ft_strcmp(cmds->cmd, "cd") == 0)
 		status = ft_cd(g, cmds->args);
 	else if (ft_strcmp(cmds->cmd, "echo") == 0)
