@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 15:19:09 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 16:43:11 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <termios.h>
 # include <errno.h>
 # include <string.h>
+# include <fcntl.h>
 
 # include <libft.h>
 # include "minishell_type.h"

@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 15:19:08 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 16:45:33 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@
 # define PARSE_UNEXPECT		2
 # define PARSE_UNEXPECT_MSG	"syntax error near unexpected token\n"
 # define PARSE_NOTTHING		3
-
 # define PARSE_CMD_NONE		4
 # define PARSE_CMD_NONE_MSG	"command not found: "
+
+# define NORMALIZE_CMD	0
+# define NORMALIZE_ARG	1
 
 t_list	*parse_line(char *line);
 char	*parse_cmd(char *cmd);
 t_list	*parse_arg(char *arg);
+char	*normalize(char *token, int type);
 
 void	print_parse_err(t_list *err);
 void	free_AST(void *data);

@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 18:09:22 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 15:31:19 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 16:54:05 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	print_CMD(t_cmd *cmd, int depth)
 	printf("%s{ \n", TEXT_COLOR);
 	print_depth(depth);
 	printf("\tcmd -> \"%s%s%s\"\n", VALUE_COLOR, cmd->cmd, TEXT_COLOR);
-	print_depth(depth);
-	printf("\ttest -> %s\n", parse_cmd(cmd->cmd));
 	print_depth(depth);
 	printf("\targs -> \n");
 	while (curr)
