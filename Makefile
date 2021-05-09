@@ -6,7 +6,7 @@
 #    By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/05/06 15:19:17 by jaeskim          ###   ########.fr        #
+#    Updated: 2021/05/09 14:36:09 by jaeskim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,19 +50,24 @@ PARSE_SRC = $(wildcard $(PARSE_DIR)/*.c)
 EXEC_DIR = $(SRC_DIR)/exec
 EXEC_SRC = $(wildcard $(EXEC_DIR)/*.c)
 
+ENVP_DIR = $(SRC_DIR)/envp
+ENVP_SRC = $(wildcard $(ENVP_DIR)/*.c)
+
 SRCS = \
 	$(wildcard $(SRC_DIR)/*.c)	\
 	$(PARSE_SRC)	\
 	$(EXEC_SRC)	\
 	$(UTIL_SRC)	\
-	$(CUROSR_SRC)
+	$(CUROSR_SRC)	\
+	$(ENVP_SRC)
 
 vpath %.c \
 	$(SRC_DIR)	\
 	$(PARSE_DIR)	\
 	$(EXEC_DIR)	\
 	$(UTIL_DIR)	\
-	$(CUROSR_DIR)
+	$(CUROSR_DIR)	\
+	$(ENVP_DIR)
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
@@ -109,26 +114,26 @@ $(NAME) : $(LIBFT_FILE) $(HEADERS) $(OBJS)
 	@printf "$(LF)🎉 $(FG_TEXT)Successfully Created $(FG_TEXT_PRIMARY)$@ $(FG_TEXT)!\n$(NO_COLOR)"
 
 # lib
-lib : $(LIBFT)
-
-lib_re : $(LIBFT)_re
+lib : libft
+lib_fclean : libft_fclean
+lib_re : lib_fclean lib
 
 # libft
-$(LIBFT) : $(LIBFT_FILE)
+libft : $(LIBFT_FILE)
 
 $(LIBFT_FILE) :
 	@make --no-print-directory -C $(LIBFT_DIR)
 
-$(LIBFT)_re :
+libft_re :
 	@make --no-print-directory -C $(LIBFT_DIR) re
 
-$(LIBFT)_clean :
+libft_clean :
 	@make --no-print-directory -C $(LIBFT_DIR) clean
 
-$(LIBFT)_fclean :
+libft_fclean :
 	@make --no-print-directory -C $(LIBFT_DIR) fclean
 
 
 .PHONY: all clean fclean re test \
 	lib lib_re	\
-	$(LIBFT) $(LIBFT)_clean $(LIBFT)_fclean
+	libft libft_clean libft_fclean

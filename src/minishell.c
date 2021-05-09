@@ -6,47 +6,44 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/07 05:08:32 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 15:31:23 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parse_util.h"
 
-void	minishell(t_minishell *g)
+t_minishell	g_sh;
+
+static void	minishell(void)
 {
 	t_list	*tmp;
 	t_list	*ASTs;
-	char	*line;
 
 	print_PS1();
-	line = get_line(g);
-	if (line == NULL)
+	get_line();
+	if (g_sh.line == NULL)
 		return ;
-	ASTs = parse_line(line);
+	ASTs = parse_line(g_sh.line);
 	if (ASTs < (t_list *)PARSE_ERROR_COUNT)
 		print_parse_err(ASTs);
 	else
 	{
-		while (ASTs)
+		tmp = ASTs;
+		while (tmp)
 		{
-			print_AST(ASTs->content, 0);
-			tmp = ASTs;
-			ASTs = ASTs->next;
-			free_AST(tmp->content);
-			free(tmp);
+			print_AST(tmp->content, 0);
+			tmp = tmp->next;
 		}
 	}
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_minishell	g;
-
 	(void)argc;
 	(void)argv;
-	init_minishell(&g, envp);
+	init_minishell(envp);
 	while (1)
-		minishell(&g);
+		minishell();
 	return (0);
 }

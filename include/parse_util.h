@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/06 19:03:21 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 13:47:12 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define LX_CTR_OP		64
 # define LX_SEPERATOR	128
 
+# define NOMALIZE_CMD	0
+# define NOMALIZE_ARG	1
+
 typedef struct s_token
 {
 	int		type;
@@ -51,5 +54,7 @@ t_AST	*syntax_AST(t_list **token);
 
 void	print_AST(t_AST	*AST, int depth);
 void	print_depth(int depth);
+
+char	*normalize(char *token, int type);
 
 #endif

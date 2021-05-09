@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 04:27:38 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/07 04:51:51 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/08 23:51:40 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	handle_sigint(int sig)
 {
 	(void)sig;
+	ft_free(g_sh.line);
+	g_sh.line = NULL;
 	ft_putchar_fd('\n', 1);
 	print_PS1();
 }

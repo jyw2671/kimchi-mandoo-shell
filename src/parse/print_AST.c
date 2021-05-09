@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 18:09:22 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/03 16:01:22 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/09 15:31:19 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	print_CMD(t_cmd *cmd, int depth)
 	printf("%s{ \n", TEXT_COLOR);
 	print_depth(depth);
 	printf("\tcmd -> \"%s%s%s\"\n", VALUE_COLOR, cmd->cmd, TEXT_COLOR);
+	print_depth(depth);
+	printf("\ttest -> %s\n", parse_cmd(cmd->cmd));
 	print_depth(depth);
 	printf("\targs -> \n");
 	while (curr)
@@ -101,4 +103,5 @@ void	print_AST(t_AST	*AST, int depth)
 		print_CTR_OP(AST->data, depth);
 	else if (AST->type == FT_REDIRECT)
 		print_REDIRECT(AST->data, depth);
+	ft_putstr_fd(NO_COLOR, 1);
 }
