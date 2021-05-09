@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 16:21:00 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/09 18:44:41 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	ft_pipe_close(int *status, t_check *g);
 int		ft_ctr_op_exec(t_ctr_op *ctr, t_check *g);
 int		ft_tree_parser(t_AST *cmds, t_check *g);
 int		ft_cmd_fork_set(t_cmd *cmds, t_check *g);
-void	ft_print_envp(int check);
 int		ft_make_cmd(char *cmd, t_list *lst);
+int		parse_cmd_err_check(char *args);
 // ft_error.c
 void	ft_error_print(char *msg, char *val);
 
