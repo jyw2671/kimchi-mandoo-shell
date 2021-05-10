@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 19:16:51 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/10 20:02:27 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ static int	ft_set_pipe(t_check *g)
 	return (0);
 }
 
+void	ft_pipe_close(t_check *g)
+{
+	t_pi_fd	*num;
+	int		pi[2];
+
+	num = (g->pipe_fd)->content;
+	dup2(pi[1], num->pi_out);
+	close(num->pi_out);
+	g->fd_i = pi[1];
+	g->fd_o = pi[0];
+	close(pi[0]);
+}
+
 void	ft_pipe_connect(int *status, t_check *g)
 {
 	t_pi_fd	*num;
@@ -42,25 +55,35 @@ void	ft_pipe_connect(int *status, t_check *g)
 	if (g->pipe_cnt <= 0)
 		return ;
 	num = (g->pipe_fd)->content;
-	if (num && num->pi_in > 0 && num->pi_out > 0)
+	if (num && num->pi_out > 0 && num->pi_in > 0 && g->pipe_check == 0)
+	// if (num && num->pi_in > 0 && num->pi_out > 0)
 	{
 		*status = dup2(num->pi_in, STDOUT_FILENO);
 		// pipe의 pi_in 부분을 stdout에 복제해준다
 		// pi_in을 stdout으로 접근 가능
 		if (*status < 0)
 			return ;
-		close(num->pi_in);
-		((t_pi_fd *)((g->pipe_fd)->content))->pi_in = -1;
+		close(num->pi_out);
+		// ((t_pi_fd *)((g->pipe_fd)->content))->pi_in = -1;
+		g->pipe_check = 1;
+		g->pipe_close = 1;
 	}
-	else if (num && num->pi_out > 0)
+	else
 	{
-		*status = dup2(STDIN_FILENO, num->pi_out);
+		if (g->fd_i != 0 && g->fd_o != 0)
+		{
+			num->pi_in = g->fd_i;
+			num->pi_out = g->fd_o;
+		}
+		*status = dup2(num->pi_out, STDIN_FILENO);
 		if (*status < 0)
 			return ;
-		close(num->pi_out);
+		close(num->pi_in);
 		ft_lstdelone(g->pipe_fd, (g->pipe_fd)->content);
 		g->pipe_fd= (g->pipe_fd)->next;
 		g->pipe_cnt--;
+		g->pipe_check = 0;
+		g->pipe_close = 0;
 	}
 }
 

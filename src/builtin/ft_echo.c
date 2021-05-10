@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:06:12 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 15:59:29 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/10 21:03:39 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	ft_echo(t_check *g, t_list *args)
 	args = args->next;
 	while (args)
 	{
-		write(1, args->content, ft_strlen(args->content));
+		ft_putstr_fd(args->content, STDOUT_FILENO);
 		args = args->next;
 		if (args)
-			write(1, " ", 1);
+			ft_putstr_fd(" ", STDOUT_FILENO);
 	}
 	if (status != 1)
-		write(1, "\n", 1);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }
 

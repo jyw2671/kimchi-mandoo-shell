@@ -6,13 +6,13 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 22:26:53 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 18:33:55 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/10 21:03:30 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cmd_pipe_set(t_cmd *cmds, t_check *g)
+int	ft_built_cmd_set(t_cmd *cmds, t_check *g)
 {
 	pid_t	pid;
 	int		status;
@@ -23,24 +23,56 @@ int	ft_cmd_pipe_set(t_cmd *cmds, t_check *g)
 		ft_error_print("fail fork", strerror(errno));
 	else if (pid == 0)
 	{
-		ft_pipe_connect(&status, g);
 		if (status < 0)
 			return (status);
-		status = ft_redir_parser(g);
+		status = ft_redir_connect(g);
 		if (status < 0)
 			return (status);
 		status = ft_cmd_exec(cmds, g);
 		if (status < 0)
 			return (status);
-		status = ft_redir_parser(g);
+		status = ft_redir_close(g);
+		ft_pipe_connect(&status, g);
 		exit(status);
 	}
 	else
 	{
 		wait(&pid);
+		// ft_pipe_connect(&status, g);
+		// if (status < 0)
+		// 	return (status);
+	}
+	return (status);
+}
+
+int	ft_cmd_set(t_cmd *cmds, t_check *g)
+{
+	pid_t	pid;
+	int		status;
+
+	status = 0;
+	pid = fork();
+	if (pid < 0)
+		ft_error_print("fail fork", strerror(errno));
+	if (pid == 0)
+	{
 		ft_pipe_connect(&status, g);
 		if (status < 0)
 			return (status);
+		status = ft_redir_connect(g);
+		if (status < 0)
+			return (status);
+		status = ft_make_cmd(cmds->cmd, cmds->args);
+		if (status < 0)
+			return (status);
+		status = ft_redir_close(g);
+		exit(status);
+	}
+	else
+	{
+		wait(&pid);
+		if (g->pipe_close == 1)
+			ft_pipe_close(g);
 	}
 	return (status);
 }
@@ -70,6 +102,6 @@ int	ft_cmd_exec(t_cmd *cmds, t_check *g)
 			exit(status);
 	}
 	else if (cmds)
-		status = ft_cmd_fork_set(cmds, g);
+		status = ft_cmd_set(cmds, g);
 	return (status);
 }
