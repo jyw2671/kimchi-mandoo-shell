@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/10 20:54:56 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/11 20:04:56 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,25 @@
 # define EXPORT	1
 # define ENV	2
 
+# define PIPE_R_ONLY	0
+# define PIPE_W_ONLY	1
+# define PIPE_R_W		2
+
 typedef struct s_pi_fd
 {
-	int		pi_in;
-	int		pi_out;
+	int		pi_read;
+	int		pi_write;
+	int		check;
 }	t_pi_fd;
 
 typedef struct s_check
 {
-	int		fd_in;
-	int		fd_out;
-	int		save_in;
-	int		save_out;
-	int		pipe_cnt;
-	int		pipe_check;
-	int		pipe_close;
-	int		fd_i;
-	int		fd_o;
-	t_list	*pipe_fd;
+	int			fd_in;
+	int			fd_out;
+	int			save_in;
+	int			save_out;
+	int			pipe_cnt;
+	t_d_list	*pipe_fd;
 }	t_check;
 
 int		exec_cmd(t_list *ASTs);
