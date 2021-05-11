@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 22:26:53 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/10 21:03:30 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/11 20:04:57 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ int	ft_cmd_set(t_cmd *cmds, t_check *g)
 	else
 	{
 		wait(&pid);
-		if (g->pipe_close == 1)
-			ft_pipe_close(g);
+		ft_pipe_close(g);
 	}
 	return (status);
 }

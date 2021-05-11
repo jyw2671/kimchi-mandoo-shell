@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/10 20:02:27 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/11 20:04:55 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	ft_set_pipe(t_check *g)
 	int		pi[2];
 	int		status;
 	t_pi_fd	*num;
+	t_pi_fd	*check;
 
 	if (!ft_malloc((void **)&num, sizeof(t_pi_fd)))
 		// TODO: 예외처리 확인 필요.
@@ -24,27 +25,14 @@ static int	ft_set_pipe(t_check *g)
 	status = pipe(pi);
 	if (status < 0)
 		return (-1);
-	num->pi_out = pi[0];
-	num->pi_in = pi[1];
+	num->pi_write = pi[0];
+	num->pi_read = pi[1];
+	num->check = PIPE_R_ONLY;
 	if (g->pipe_fd)
-		ft_lstlast(g->pipe_fd)->next = ft_lstnew(num);
-	else
-		g->pipe_fd = ft_lstnew(num);
+		((t_pi_fd *)(g->pipe_fd->content))->check = PIPE_R_W;
+	ft_d_lstadd_back(g->pipe_fd, ft_d_lstnew(num));
 	g->pipe_cnt++;
 	return (0);
-}
-
-void	ft_pipe_close(t_check *g)
-{
-	t_pi_fd	*num;
-	int		pi[2];
-
-	num = (g->pipe_fd)->content;
-	dup2(pi[1], num->pi_out);
-	close(num->pi_out);
-	g->fd_i = pi[1];
-	g->fd_o = pi[0];
-	close(pi[0]);
 }
 
 void	ft_pipe_connect(int *status, t_check *g)
@@ -55,48 +43,71 @@ void	ft_pipe_connect(int *status, t_check *g)
 	if (g->pipe_cnt <= 0)
 		return ;
 	num = (g->pipe_fd)->content;
-	if (num && num->pi_out > 0 && num->pi_in > 0 && g->pipe_check == 0)
-	// if (num && num->pi_in > 0 && num->pi_out > 0)
+	if (num->check == PIPE_R_ONLY)
+		*status = dup2(num->pi_read, STDOUT_FILENO);
+	else if (num->check == PIPE_W_ONLY)
+		*status = dup2(num->pi_write, STDIN_FILENO);
+	else if (num->check == PIPE_R_W)
 	{
-		*status = dup2(num->pi_in, STDOUT_FILENO);
-		// pipe의 pi_in 부분을 stdout에 복제해준다
-		// pi_in을 stdout으로 접근 가능
+		num = (g->pipe_fd->prev)->content;
+		*status = dup2(num->pi_write, STDIN_FILENO);
 		if (*status < 0)
 			return ;
-		close(num->pi_out);
-		// ((t_pi_fd *)((g->pipe_fd)->content))->pi_in = -1;
-		g->pipe_check = 1;
-		g->pipe_close = 1;
+		num = (g->pipe_fd)->content;
+		*status = dup2(num->pi_read, STDOUT_FILENO);
 	}
-	else
+	if (*status < 0)
+		return ;
+}
+
+void	ft_pipe_close(t_check *g)
+{
+	t_pi_fd		*num;
+	t_d_list	*tmp;
+
+	if (g->pipe_cnt <= 0)
+		return ;
+	num = (g->pipe_fd)->content;
+	if (num->check == PIPE_R_ONLY)
 	{
-		if (g->fd_i != 0 && g->fd_o != 0)
-		{
-			num->pi_in = g->fd_i;
-			num->pi_out = g->fd_o;
-		}
-		*status = dup2(num->pi_out, STDIN_FILENO);
-		if (*status < 0)
-			return ;
-		close(num->pi_in);
-		ft_lstdelone(g->pipe_fd, (g->pipe_fd)->content);
-		g->pipe_fd= (g->pipe_fd)->next;
-		g->pipe_cnt--;
-		g->pipe_check = 0;
-		g->pipe_close = 0;
+		close(num->pi_read);
+		num->check = PIPE_W_ONLY;
+		return ;
 	}
+	// TODO: 아래 두가지 케이스 refactoring 필요
+	else if (num->check == PIPE_W_ONLY)
+	{
+		close(num->pi_write);
+		tmp = (g->pipe_fd)->next;
+		ft_d_lstdelone(g->pipe_fd, (g->pipe_fd)->content);
+		g->pipe_fd = tmp;
+	}
+	else if (num->check == PIPE_R_W)
+	{
+		num = (g->pipe_fd)->prev;
+		close(num->pi_write);
+		tmp = (g->pipe_fd)->next;
+		ft_d_lstdelone(g->pipe_fd, (g->pipe_fd)->content);
+		g->pipe_fd = tmp;
+		num->check = PIPE_W_ONLY;
+	}
+	g->pipe_cnt--;
 }
 
 int	ft_pipe_exec(t_pipe	*pipes, t_check *g)
 {
-	int	status;
+	int		status;
 
 	status = 0;
 	status = ft_set_pipe(g);
 	if (status != 0)
 		return (status);
+	// ((t_pi_fd *)(g->pipe_fd->content))->check = 1;
 	status = ft_tree_parser(pipes->left, g);
+	// TODO: close()
 	if (status)
 		return (status);
-	return (ft_tree_parser(pipes->right, g));
+	// ((t_pi_fd *)(g->pipe_fd->content))->check = 0;
+	status = ft_tree_parser(pipes->right, g);
+	return (status);
 }

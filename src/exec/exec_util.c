@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:58:07 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/10 21:04:35 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/11 20:04:52 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	ft_make_cmd(char *cmd, t_list *lst)
 		// TODO: 예외처리 필요
 		return (-1);
 	cnt = 0;
+	// TODO: 분리 필요!
 	args[cnt++] = parse_cmd(normalize(cmd, NORMALIZE_CMD));
 	if (parse_cmd_err_check(args[0]) == -1)
 		return (-1);
