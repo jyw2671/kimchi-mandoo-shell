@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/11 20:04:56 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/12 16:03:55 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		ft_redir_close(t_check *g);
 int		ft_pipe_exec(t_pipe	*pipes, t_check *g);
 void	ft_pipe_connect(int *status, t_check *g);
 void	ft_pipe_close(t_check *g);
+void	free_pipe(void *data);
 // exec_util.c
 int		ft_ctr_op_exec(t_ctr_op *ctr, t_check *g);
 int		ft_tree_parser(t_AST *cmds, t_check *g);
