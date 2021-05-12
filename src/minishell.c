@@ -35,6 +35,7 @@ static void	minishell(void)
 			print_AST(tmp->content, 0);
 			tmp = tmp->next;
 		}
+		ft_lstclear(&ASTs, free_AST);
 	}
 }
 
