@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 17:03:48 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/12 14:47:04 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	minishell(void)
 			tmp = tmp->next;
 		}
 		exec_cmd(ASTs);
+		ft_lstclear(&ASTs, free_AST);
 	}
 }
 
