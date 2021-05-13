@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/12 20:35:57 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/13 14:31:43 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_pipe_connect(int *status, t_check *g)
 	num = (g->pipe_fd)->content;
 	if (num->check == PIPE_R_ONLY)
 		*status = dup2(num->pi_read, STDOUT_FILENO);
-	else if (num->check == PIPE_W_ONLY && g->fd_in != 0 && (g->redir_in = 1))
+	else if (num->check == PIPE_W_ONLY && g->fd_in != 0 && g->redir_in == 1)
 		return ;
 	else if (num->check == PIPE_W_ONLY)
 		*status = dup2(num->pi_write, STDIN_FILENO);
@@ -51,8 +51,6 @@ void	ft_pipe_connect(int *status, t_check *g)
 	{
 		if (g->fd_in == 0)
 			*status = dup2(num->pi_write, STDIN_FILENO);
-		else
-			g->redir_in = 1;
 		if (*status < 0)
 			return ;
 		num = (g->pipe_fd->next)->content;
@@ -72,7 +70,7 @@ void	ft_pipe_write_close(t_check *g, int check)
 		num = (g->pipe_fd)->content;
 		close(num->pi_write);
 	}
-	else
+	if (g->redir_in != 0)
 		g->redir_in = 0;
 	tmp = (g->pipe_fd)->next;
 	ft_d_lstdelone(g->pipe_fd, free_pipe);

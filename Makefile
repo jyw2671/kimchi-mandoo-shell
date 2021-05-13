@@ -6,7 +6,7 @@
 #    By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
-#    Updated: 2021/05/13 14:51:32 by yjung            ###   ########.fr        #
+#    Updated: 2021/05/13 14:56:03 by yjung            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ HEADERS = $(wildcard $(INC_DIR)/*.h)
 UTIL_DIR = $(SRC_DIR)/util
 UTIL_SRC = $(wildcard $(UTIL_DIR)/*.c)
 
-CUROSR_DIR = $(SRC_DIR)/cursor
-CUROSR_SRC = $(wildcard $(CUROSR_DIR)/*.c)
+CURSOR_DIR = $(SRC_DIR)/cursor
+CURSOR_SRC = $(wildcard $(CURSOR_DIR)/*.c)
 
 PARSE_DIR = $(SRC_DIR)/parse
 PARSE_SRC = $(wildcard $(PARSE_DIR)/*.c)
@@ -52,6 +52,9 @@ EXEC_SRC = $(wildcard $(EXEC_DIR)/*.c)
 
 ENVP_DIR = $(SRC_DIR)/envp
 ENVP_SRC = $(wildcard $(ENVP_DIR)/*.c)
+
+BUILTIN_DIR = $(SRC_DIR)/builtin
+BUILTIN_SRC = $(wildcard $(BUILTIN_DIR)/*.c)
 
 SRCS = \
 	$(wildcard $(SRC_DIR)/*.c)	\

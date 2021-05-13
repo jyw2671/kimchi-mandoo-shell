@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:58:07 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/11 20:04:52 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/13 15:09:24 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	ft_ctr_op_exec(t_ctr_op *ctr, t_check *g)
 
 	status = 0;
 	status = ft_tree_parser(ctr->left, g);
-	if (ctr->type == 2 && status != 0)
+	if (ctr->type == FT_AND && status != 0)
+		return (status);
+	if (ctr->type == FT_OR && status == 0)
 		return (status);
 	status = ft_tree_parser(ctr->right, g);
 	return (status);
@@ -73,7 +75,7 @@ int	ft_make_cmd(char *cmd, t_list *lst)
 		return (-1);
 	cnt = 0;
 	// TODO: 분리 필요!
-	args[cnt++] = parse_cmd(normalize(cmd, NORMALIZE_CMD));
+	args[cnt++] = parse_cmd(normalize(&cmd, NORMALIZE_CMD));
 	if (parse_cmd_err_check(args[0]) == -1)
 		return (-1);
 	curr = lst;
