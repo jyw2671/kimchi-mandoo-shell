@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:57:48 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 23:51:42 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/15 22:22:18 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@ static void	handle_key_move(int keycode)
 		cursor_right();
 		++g_sh.cmd_i;
 	}
+	else if (keycode == CTRL_LEFT)
+		cursor_ctrl_left();
+	else if (keycode == CTRL_RIGHT)
+		cursor_ctrl_right();
+}
+
+static void	handle_home_end(int keycode)
+{
+	if (keycode == KEY_HOME)
+	{
+		while (g_sh.cmd_i > 0)
+		{
+			cursor_left();
+			--g_sh.cmd_i;
+		}
+	}
+	else if (keycode == KEY_END)
+	{
+		while (g_sh.cmd_i < g_sh.cmd_s)
+		{
+			cursor_right();
+			++g_sh.cmd_i;
+		}
+	}
 }
 
 void	handle_key_input(int keycode)
@@ -67,6 +91,7 @@ void	handle_key_input(int keycode)
 		exit_minishell(0);
 	}
 	if (is_arrow_left_right(keycode))
-		handle_key_move(keycode);
-	return ;
+		return (handle_key_move(keycode));
+	if (keycode == KEY_HOME || keycode == KEY_END)
+		handle_home_end(keycode);
 }
