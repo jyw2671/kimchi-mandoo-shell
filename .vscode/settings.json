@@ -3,6 +3,9 @@
     "functional": "c",
     "minishell.h": "c",
     "unistd.h": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "parse_util.h": "c",
+    "bitset": "c",
+    "ratio": "c"
   }
 }

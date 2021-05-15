@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/13 14:31:43 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 19:23:18 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int	ft_pipe_exec(t_pipe	*pipes, t_check *g)
 	status = ft_set_pipe(g);
 	if (status != 0)
 		return (status);
-	status = ft_tree_parser(pipes->left, g);
+	status = exec_tree_parser(pipes->left, g);
 	if (status)
 		return (status);
-	status = ft_tree_parser(pipes->right, g);
+	status = exec_tree_parser(pipes->right, g);
 	return (status);
 }

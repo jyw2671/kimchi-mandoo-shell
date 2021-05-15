@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:11:40 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/10 21:03:21 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 19:05:18 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	ft_envp_store(char *args, int *status, int cnt)
 	curr->content = args;
 }
 
-int		ft_export(t_list *args)
+int	ft_export(t_list *args)
 {
 	char	*str;
 	int		status;

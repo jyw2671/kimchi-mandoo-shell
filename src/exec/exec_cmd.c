@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:45:21 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/12 15:24:26 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 19:02:44 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	lst_free(t_d_list **lst)
-// {
-// 	if ((*lst)->next)
-// 		lst_free(lst->next);
-// 	if ((*lst)->prev)
-// 		lst_free(&(lst->prev));
-// 	if ((*lst)->content)
-// 		free_pipe((*lst)->content);
-// 	free(lst);
-// }
 
 int	exec_cmd(t_list *ASTs)
 {
@@ -32,14 +21,12 @@ int	exec_cmd(t_list *ASTs)
 	while (ASTs)
 	{
 		ft_memset(&g, 0, sizeof(t_check));
+		// TODO: save_io 추후 수정 필요!
 		g.save_in = -1;
 		g.save_out = -1;
-		status = ft_tree_parser(ASTs->content, &g);
-		if (status != 0)
-			return (status);
+		status = exec_tree_parser(ASTs->content, &g);
+		// TODO: status 확인 필요!
 		ASTs = ASTs->next;
-		// if (g.pipe_fd)
-		// 	lst_free(&g.pipe_fd);
 	}
 	return (status);
 }

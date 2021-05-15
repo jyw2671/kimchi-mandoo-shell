@@ -6,48 +6,23 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:58:07 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/13 15:09:24 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 19:20:27 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_tree_parser(t_AST *cmds, t_check *g)
-{
-	int		status;
-	// t_cmd	*cmp;
-
-	status = 0;
-	if (cmds->type == FT_CMD)
-	{
-		// cmp = cmds->data;
-		// if ((ft_strcmp(cmp->cmd, "echo") == 0))
-		// 	status = ft_cmd_pipe_set(cmds->data, g);
-		// else
-		status = ft_cmd_exec(cmds->data, g);
-	}
-	else if (cmds->type == FT_PIPE)
-		status = ft_pipe_exec(cmds->data, g);
-	else if (cmds->type == FT_REDIRECT)
-		status = ft_redir_exec(cmds->data, g);
-	else if (cmds->type == FT_CTR_OP)
-		status = ft_ctr_op_exec(cmds->data, g);
-	if (status != 0)
-		return (status);
-	return (status);
-}
 
 int	ft_ctr_op_exec(t_ctr_op *ctr, t_check *g)
 {
 	int		status;
 
 	status = 0;
-	status = ft_tree_parser(ctr->left, g);
+	status = exec_tree_parser(ctr->left, g);
 	if (ctr->type == FT_AND && status != 0)
 		return (status);
 	if (ctr->type == FT_OR && status == 0)
 		return (status);
-	status = ft_tree_parser(ctr->right, g);
+	status = exec_tree_parser(ctr->right, g);
 	return (status);
 }
 
@@ -81,13 +56,12 @@ int	ft_make_cmd(char *cmd, t_list *lst)
 	curr = lst;
 	while (curr)
 	{
-		args[cnt] = normalize(curr->content, NORMALIZE_CMD);
+		args[cnt] = normalize((char **)&curr->content, NORMALIZE_CMD);
 		if (parse_cmd_err_check(args[cnt++]) == -1)
 			return (-1);
 		curr = curr->next;
 	}
 	args[cnt] = NULL;
 	status = execve(args[0], args, (char **)ft_lst_to_array(g_sh.envp));
-	ft_lstclear(&lst, ft_free);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/13 15:33:27 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 19:02:44 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,27 @@
 // 	return (status);
 // }
 
-int	ft_redir_connect(t_check *g)
+int	ft_redir_connect(t_check *g, int check)
 {
 	int	status;
 
 	status = 0;
-	if (g->fd_in != 0 && g->save_in == -1)
+	if (g->fd_in > 0)
 	{
-		g->save_in = dup(STDIN_FILENO);
+		if (check == IS_DUP)
+			status = dup(STDIN_FILENO);
+		if (status < 0)
+			return (0);
 		status = dup2(g->fd_in, STDIN_FILENO);
 	}
 	if (status < 0)
 		return (status);
-	if (g->fd_out != 0 && g->save_out == -1)
+	if (g->fd_out > 0)
 	{
-		g->save_out = dup(STDOUT_FILENO);
+		if (check == IS_DUP)
+			status = dup(STDOUT_FILENO);
+		if (status < 0)
+			return (0);
 		status = dup2(g->fd_out, STDOUT_FILENO);
 	}
 	return (status);
@@ -49,22 +55,28 @@ int	ft_redir_close(t_check *g)
 	int	status;
 
 	status = 0;
-	if (g->fd_in != 0 && g->save_in != -1)
+	if (g->fd_in > 0)
 	{
 		close(g->fd_in);
-		status = dup2(g->save_in, STDIN_FILENO);
-		close(g->save_in);
-		g->save_in = -1;
+		if (g->save_in != -1)
+		{
+			status = dup2(g->save_in, STDIN_FILENO);
+			close(g->save_in);
+			g->save_in = -1;
+		}
 		g->fd_in = 0;
 	}
 	if (status < 0)
 		return (status);
-	if (g->fd_out != 0 && g->save_out != -1)
+	if (g->fd_out > 0)
 	{
 		close(g->fd_out);
-		status = dup2(g->save_out, STDOUT_FILENO);
-		close(g->save_out);
-		g->save_out = -1;
+		if (g->save_out != -1)
+		{
+			status = dup2(g->save_out, STDOUT_FILENO);
+			close(g->save_out);
+			g->save_out = -1;
+		}
 		g->fd_out = 0;
 	}
 	return (status);
@@ -87,10 +99,13 @@ int	ft_redir_exec(t_redirect *redir, t_check *g)
 	// else if (redir->type == FT_FD_HEREDOC)
 	// 	ft_redir_heredoc();
 	if (g->fd_in < 0 || g->fd_out < 0)
+	{
+		status = -1;
 		ft_error_print("open fail", strerror(errno));
+	}
 	else if (!redir->AST)
 		return (0);
 	else
-		status = ft_tree_parser(redir->AST, g);
+		status = exec_tree_parser(redir->AST, g);
 	return (status);
 }

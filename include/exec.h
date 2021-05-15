@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/12 20:09:49 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 19:20:52 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define PIPE_W_ONLY	1
 # define PIPE_R_W		2
 
+# define N_DUP		0
+# define IS_DUP		1
+
 typedef struct s_pi_fd
 {
 	int		pi_read;
@@ -47,13 +50,17 @@ typedef struct s_check
 }	t_check;
 
 int		exec_cmd(t_list *ASTs);
+
+// util funtions
+int		exec_tree_parser(t_AST *cmds, t_check *g);
+
 // ft_cmd.c
 int		ft_cmd_exec(t_cmd *cmds, t_check *g);
 int		ft_built_cmd_set(t_cmd *cmds, t_check *g);
 int		ft_cmd_set(t_cmd *cmds, t_check *g);
 // redirection.c
 int		ft_redir_exec(t_redirect *redir, t_check *g);
-int		ft_redir_connect(t_check *g);
+int		ft_redir_connect(t_check *g, int check);
 int		ft_redir_close(t_check *g);
 void	ft_pipe_write_close(t_check *g, int check);
 // pipe.c
@@ -62,7 +69,6 @@ void	ft_pipe_connect(int *status, t_check *g);
 void	ft_pipe_close(t_check *g);
 // exec_util.c
 int		ft_ctr_op_exec(t_ctr_op *ctr, t_check *g);
-int		ft_tree_parser(t_AST *cmds, t_check *g);
 int		ft_make_cmd(char *cmd, t_list *lst);
 int		parse_cmd_err_check(char *args);
 // ft_error.c

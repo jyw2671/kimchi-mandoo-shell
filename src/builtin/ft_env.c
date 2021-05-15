@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:09:30 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/09 16:27:36 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 15:01:52 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_print_envp(int check)
 			ft_putstr_fd("declare -x " ,STDOUT_FILENO);
 			ft_putstr_fd(env->content, STDOUT_FILENO);
 			env = env->next;
+			ft_putstr_fd("\n", STDOUT_FILENO);
 		}
 		return ;
 	}
