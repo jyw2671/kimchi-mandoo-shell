@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 19:20:52 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:30:59 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@
 # include <errno.h>
 # include <string.h>
 
-// # define SIDE_OUT	0;
-// # define SIDE_IN	1;
-
-# define EXPORT	1
-# define ENV	2
+# define DUP_ERROR		-1
+# define MALLOC_FAIL	-2
+# define OPEN_FAIL		-3
 
 # define PIPE_R_ONLY	0
 # define PIPE_W_ONLY	1
 # define PIPE_R_W		2
-
-# define N_DUP		0
-# define IS_DUP		1
 
 typedef struct s_pi_fd
 {

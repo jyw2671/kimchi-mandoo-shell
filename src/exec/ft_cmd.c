@@ -26,7 +26,7 @@ int	ft_built_cmd_set(t_cmd *cmds, t_check *g)
 		ft_pipe_connect(&status, g);
 		if (status < 0)
 			return (status);
-		status = ft_redir_connect(g, N_DUP);
+		status = ft_redir_connect(g, 0);
 		if (status < 0)
 			return (status);
 		status = ft_cmd_exec(cmds, g);
@@ -55,7 +55,7 @@ int	ft_cmd_set(t_cmd *cmds, t_check *g)
 		ft_pipe_connect(&status, g);
 		if (status < 0)
 			return (status);
-		status = ft_redir_connect(g, N_DUP);
+		status = ft_redir_connect(g, 0);
 		if (status < 0)
 			return (status);
 		status = ft_make_cmd(cmds->cmd, cmds->args);
@@ -81,7 +81,7 @@ int	ft_cmd_exec(t_cmd *cmds, t_check *g)
 	if (ft_strcmp(cmds->cmd, "env") == 0)
 		return (ft_env());
 	if (ft_strcmp(cmds->cmd, "export") == 0)
-		return (ft_export(cmds->args));
+		return (ft_export(g, cmds->args));
 	if (ft_strcmp(cmds->cmd, "unset") == 0)
 		return (ft_unset(g, cmds->args));
 	if (ft_strcmp(cmds->cmd, "exit") == 0)

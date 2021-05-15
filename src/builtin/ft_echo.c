@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:06:12 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/10 21:03:39 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:16:27 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	ft_echo(t_check *g, t_list *args)
 	args = args->next;
 	while (args)
 	{
+		// TODO: envp 치환
 		ft_putstr_fd(args->content, STDOUT_FILENO);
 		args = args->next;
 		if (args)
