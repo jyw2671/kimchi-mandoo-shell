@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/15 19:02:44 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/15 22:29:01 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,47 @@
 // 	return (status);
 // }
 
-int	ft_redir_connect(t_check *g, int check)
+int	ft_redir_connect(t_check *g, int is_dup)
+{
+	if (g->fd_in > 0)
+	{
+		if (is_dup)
+			g->save_in = dup(STDIN_FILENO);
+		if (g->save_in < 0)
+			return (DUP_ERROR);
+		if (dup2(g->fd_in, STDIN_FILENO) < 0)
+			return (DUP_ERROR);
+	}
+	if (g->fd_out > 0)
+	{
+		if (is_dup)
+			g->save_out = dup(STDOUT_FILENO);
+		if (g->save_out < 0)
+			return (DUP_ERROR);
+		if (dup2(g->fd_out, STDOUT_FILENO) < 0)
+			return (DUP_ERROR);
+	}
+	return (0);
+}
+
+static int	redir_connect_dup(int *redir_fd, int *save, int is_red_in)
 {
 	int	status;
 
 	status = 0;
-	if (g->fd_in > 0)
+	close(*redir_fd);
+	if (*save != -1)
 	{
-		if (check == IS_DUP)
-			status = dup(STDIN_FILENO);
+		if (is_red_in)
+			status = dup2(*save, STDIN_FILENO);
+		else
+			status = dup2(*save, STDOUT_FILENO);
 		if (status < 0)
-			return (0);
-		status = dup2(g->fd_in, STDIN_FILENO);
+			return (DUP_ERROR);
+		close(*save);
+		*save = -1;
 	}
-	if (status < 0)
-		return (status);
-	if (g->fd_out > 0)
-	{
-		if (check == IS_DUP)
-			status = dup(STDOUT_FILENO);
-		if (status < 0)
-			return (0);
-		status = dup2(g->fd_out, STDOUT_FILENO);
-	}
+	*redir_fd = 0;
 	return (status);
 }
 
@@ -56,29 +74,11 @@ int	ft_redir_close(t_check *g)
 
 	status = 0;
 	if (g->fd_in > 0)
-	{
-		close(g->fd_in);
-		if (g->save_in != -1)
-		{
-			status = dup2(g->save_in, STDIN_FILENO);
-			close(g->save_in);
-			g->save_in = -1;
-		}
-		g->fd_in = 0;
-	}
+		status = redir_connect_dup(&g->fd_in, &g->save_in, 1);
 	if (status < 0)
 		return (status);
 	if (g->fd_out > 0)
-	{
-		close(g->fd_out);
-		if (g->save_out != -1)
-		{
-			status = dup2(g->save_out, STDOUT_FILENO);
-			close(g->save_out);
-			g->save_out = -1;
-		}
-		g->fd_out = 0;
-	}
+		status = redir_connect_dup(&g->fd_out, &g->save_out, 0);
 	return (status);
 }
 
