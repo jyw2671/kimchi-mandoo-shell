@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:19:08 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 23:51:42 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/15 22:31:21 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	get_line(void)
 	{
 		if (is_special_key(c))
 			handle_key_input(c);
-		else
+		else if (ft_isprint(c))
 		{
 			g_sh.line = append_char(g_sh.line, c);
 			if (g_sh.line == NULL)

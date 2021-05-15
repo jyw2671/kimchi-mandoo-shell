@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cursor.h                                           :+:      :+:    :+:   */
+/*   cursor_ctrl_right.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 15:29:48 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 22:19:02 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/05/15 22:17:57 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/05/15 22:19:03 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURSOR_H
-# define CURSOR_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-int		putchar_tc(int tc);
-void	delete_line(void);
-void	delete_char(void);
-void	cursor_left(void);
-void	cursor_right(void);
-void	cursor_ctrl_left(void);
-void	cursor_ctrl_right(void);
-
-#endif
+void	cursor_ctrl_right(void)
+{
+	while (g_sh.cmd_i < g_sh.cmd_s && g_sh.line[g_sh.cmd_i] == ' ')
+	{
+		cursor_right();
+		++g_sh.cmd_i;
+	}
+	while (g_sh.cmd_i < g_sh.cmd_s && g_sh.line[g_sh.cmd_i] != ' ')
+	{
+		cursor_right();
+		++g_sh.cmd_i;
+	}
+}

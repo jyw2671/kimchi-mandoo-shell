@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/11 15:38:53 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/15 22:23:31 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@
 
 # define ARROW_UP		4283163
 # define ARROW_DOWN		4348699
+# define CTRL_LEFT		25115
+# define CTRL_RIGHT		26139
 # define ARROW_LEFT		4479771
 # define ARROW_RIGHT	4414235
 # define DELETE			127
 # define EOF_CHAR		'\4'
+# define KEY_HOME		4741915
+# define KEY_END		4610843
 
 # define PS1	"minishell>"
 
