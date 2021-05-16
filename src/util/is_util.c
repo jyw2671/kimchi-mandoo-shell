@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:59:24 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 22:27:07 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/16 16:31:16 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	is_special_key(int keycode)
 		is_eof(keycode) || \
 		keycode == KEY_HOME || \
 		keycode == KEY_END || \
+		keycode == CLS || \
 		keycode == '\t')
 		return (1);
 	return (0);
