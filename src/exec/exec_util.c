@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:58:07 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/15 19:20:27 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/16 19:06:36 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	parse_cmd_err_check(char *args)
 	else if ((int)args == PARSE_CMD_NONE)
 		ft_error_print(PARSE_CMD_NONE_MSG, strerror(errno));
 	else
-		return (0);
-	return (-1);
+		return (SUCCESS);
+	return (FAIL);
 }
 
 int	ft_make_cmd(char *cmd, t_list *lst)
@@ -47,18 +47,18 @@ int	ft_make_cmd(char *cmd, t_list *lst)
 	status = 0;
 	if (!ft_malloc((void **)&args, sizeof(char *) * (ft_lstsize(lst) + 2)))
 		// TODO: 예외처리 필요
-		return (-1);
+		return (FAIL);
 	cnt = 0;
 	// TODO: 분리 필요!
 	args[cnt++] = parse_cmd(normalize(&cmd, NORMALIZE_CMD));
 	if (parse_cmd_err_check(args[0]) == -1)
-		return (-1);
+		return (FAIL);
 	curr = lst;
 	while (curr)
 	{
 		args[cnt] = normalize((char **)&curr->content, NORMALIZE_CMD);
 		if (parse_cmd_err_check(args[cnt++]) == -1)
-			return (-1);
+			return (FAIL);
 		curr = curr->next;
 	}
 	args[cnt] = NULL;

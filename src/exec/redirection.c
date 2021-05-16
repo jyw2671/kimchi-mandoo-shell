@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/15 22:29:01 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/16 19:07:30 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_redir_connect(t_check *g, int is_dup)
 		if (dup2(g->fd_out, STDOUT_FILENO) < 0)
 			return (DUP_ERROR);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 static int	redir_connect_dup(int *redir_fd, int *save, int is_red_in)
@@ -104,7 +104,7 @@ int	ft_redir_exec(t_redirect *redir, t_check *g)
 		ft_error_print("open fail", strerror(errno));
 	}
 	else if (!redir->AST)
-		return (0);
+		return (SUCCESS);
 	else
 		status = exec_tree_parser(redir->AST, g);
 	return (status);
