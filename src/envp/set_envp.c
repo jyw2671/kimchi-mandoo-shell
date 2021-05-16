@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 17:42:02 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/16 18:10:12 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/16 19:03:05 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ int	set_envp(char *value)
 		g_sh.envp = new_envp(value);
 		if (g_sh.envp == NULL)
 			return (MALLOC_FAIL);
-		return (0);
+		return (SUCCESS);
 	}
 	envp = get_envp(value, g_sh.envp);
 	if (envp)
 	{
 		ft_free(envp->content);
 		envp->content = value;
-		return (0);
+		return (SUCCESS);
 	}
 	envp = ft_lstlast(g_sh.envp);
 	envp->next = new_envp(value);
 	if (envp->next == NULL)
 		return (MALLOC_FAIL);
-	return (0);
+	return (SUCCESS);
 }
