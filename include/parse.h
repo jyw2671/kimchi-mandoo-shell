@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/11 13:37:50 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/16 19:57:52 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 t_list	*parse_line(char *line);
 char	*parse_cmd(char *cmd);
-t_list	*parse_arg(char *arg);
+t_list	*parse_arg(t_list *args);
 char	*normalize(char **token, int type);
 
 void	print_parse_err(t_list *err);
