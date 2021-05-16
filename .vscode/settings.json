@@ -6,6 +6,9 @@
     "sstream": "c",
     "parse_util.h": "c",
     "bitset": "c",
-    "ratio": "c"
+    "ratio": "c",
+    "cursor.h": "c",
+    "envp.h": "c",
+    "typeinfo": "c"
   }
 }

@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 17:12:27 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 17:45:23 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/16 16:57:44 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static int	is_builtin(t_cmd *cmds)
 	if (ft_strcmp(cmds->cmd, "env") == 0)
 		return (1);
 	if (ft_strcmp(cmds->cmd, "export") == 0)
-		return (1);
+		return (0);
 	if (ft_strcmp(cmds->cmd, "unset") == 0)
-		return (1);
+		return (0);
 	if (ft_strcmp(cmds->cmd, "exit") == 0)
 		return (0);
 	return (0);

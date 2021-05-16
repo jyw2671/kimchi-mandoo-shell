@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 22:30:59 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/16 18:06:06 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # define PIPE_R_ONLY	0
 # define PIPE_W_ONLY	1
 # define PIPE_R_W		2
+
+# define NON_EXISTENT	0
+# define EXIST_EMPTY	1
+# define EXISTENT		2
+# define WRONG_NAME		3
 
 typedef struct s_pi_fd
 {

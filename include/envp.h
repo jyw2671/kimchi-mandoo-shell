@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 12:23:37 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/11 12:52:42 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/16 17:52:56 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 
 t_list	*get_envp(char *name, t_list *envp);
 char	*get_envp_value(char *name);
+int		set_envp(char *env);
 
 #endif
