@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 22:26:53 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 16:41:10 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 19:13:03 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	ft_cmd_exec(t_cmd *cmds, t_check *g)
 	if (args == (t_list *)PARSE_ARG_ERR)
 		return (FAIL);
 	if (ft_strcmp(cmds->cmd, "cd") == 0)
-		status = ft_cd(g, args);
+		status = ft_cd(args);
 	else if (ft_strcmp(cmds->cmd, "echo") == 0)
-		status = ft_echo(g, args);
+		status = ft_echo(args);
 	else if (ft_strcmp(cmds->cmd, "pwd") == 0)
-		status = ft_pwd(g);
+		status = ft_pwd();
 	else if (ft_strcmp(cmds->cmd, "env") == 0)
 		status = ft_env(args);
 	else if (ft_strcmp(cmds->cmd, "export") == 0)
