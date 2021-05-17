@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 17:42:00 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 18:01:08 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	ft_set_pipe(t_check *g)
 	t_pi_fd	*num;
 
 	if (!ft_malloc((void **)&num, sizeof(t_pi_fd)))
-		// TODO: 예외처리 확인 필요.
 		return (-1);
 	status = pipe(pi);
 	if (status < 0)

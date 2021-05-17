@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 17:50:29 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 18:00:04 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int	ft_redir_exec(t_redirect *redir, t_check *g)
 		g->fd_out = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (redir->type == FT_FD_APPEND)
 		g->fd_out = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	// else if (redir->type == FT_FD_HEREDOC)
-	// 	ft_redir_heredoc();
 	if (g->fd_in < 0 || g->fd_out < 0)
 	{
 		status = -1;

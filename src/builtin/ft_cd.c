@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:13:05 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 15:50:29 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 18:00:50 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_cd(t_check *g, t_list *args)
 	int		status;
 	char	*path;
 
-	// TODO: 구현 필요
 	(void)g;
 	(void)args;
 	status = 0;
@@ -27,6 +26,5 @@ int	ft_cd(t_check *g, t_list *args)
 		ft_error_print("cd", strerror(errno));
 		return (1);
 	}
-	// ft_cmd_check();
 	return (status);
 }

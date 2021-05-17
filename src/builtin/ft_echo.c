@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:06:12 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/15 22:16:27 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 18:00:46 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ int	ft_echo(t_check *g, t_list *args)
 
 	(void)g;
 	status = 0;
-	// -n 옵션은 라인 끝에서 new line 을 제외시킨다
 	if (ft_strcmp(args->content, "-n") == 0)
 		status = 1;
 	args = args->next;
 	while (args)
 	{
-		// TODO: envp 치환
 		ft_putstr_fd(args->content, STDOUT_FILENO);
 		args = args->next;
 		if (args)
@@ -34,5 +32,3 @@ int	ft_echo(t_check *g, t_list *args)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }
-
-// envp 치환해주는 함수

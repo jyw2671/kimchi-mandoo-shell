@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:11:40 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/16 20:45:37 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 18:00:35 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	ft_export(t_list *args)
 		print_export();
 	while (args)
 	{
-		// TODO: env 저장시 double quotes 정리 필요
 		value = ft_strdup(args->content);
 		if (value == NULL)
 			return (MALLOC_FAIL);
