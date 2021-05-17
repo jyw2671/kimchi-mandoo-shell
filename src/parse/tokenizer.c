@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 20:24:25 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 15:07:28 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/17 21:19:07 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_flag(int flag, char **line)
 		flag ^= TK_QOUTE;
 	else if (!(flag & ~(TK_QOUTE)) && **line == '\\')
 		flag |= TK_ESCAPE;
-	else
+	else if ((flag & TK_ESCAPE) && *(*line - 1) != '\\')
 		flag &= ~TK_ESCAPE;
 	return (flag);
 }
