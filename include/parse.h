@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/16 19:57:52 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/17 22:19:04 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-# define PARSE_ERROR_COUNT	5
+# define PARSE_ERROR_COUNT	6
 # define PARSE_MALLOC		0
 # define PARSE_MALLOC_MSG	"Memory allocation failure\n"
 # define PARSE_INVAILD		1
@@ -25,7 +25,8 @@
 # define PARSE_NOTTHING		3
 # define PARSE_CMD_NONE		4
 # define PARSE_CMD_NONE_MSG	"command not found: "
-# define PARSE_OPEN			5
+# define PARSE_WILDCARD		5
+# define PARSE_WILDCARD_MSG	5
 
 # define NORMALIZE_CMD	0
 # define NORMALIZE_ARG	1
