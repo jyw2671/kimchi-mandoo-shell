@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 09:31:53 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/17 16:15:31 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 21:30:36 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	new_arg(t_list **target, char *value)
 {
 	if (!ft_malloc((void **)target, sizeof(t_list)))
 		return (-1);
-	(*target)->content = normalize(&value, NORMALIZE_CMD);
+	(*target)->content = normalize(&value, NORMALIZE_ARG);
 	if ((*target)->content == NULL)
 	{
 		ft_free((*target));
