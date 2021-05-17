@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:13:05 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 18:00:50 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 18:17:06 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,19 @@ int	ft_cd(t_check *g, t_list *args)
 	char	*path;
 
 	(void)g;
-	(void)args;
 	status = 0;
+	if (!args)
+		return (status);
+	path = strdup(args->content);
+	if (path == NULL)
+		return (MALLOC_FAIL);
 	status = chdir(path);
 	if (status < 0)
 	{
 		ft_error_print("cd", strerror(errno));
+		free(path);
 		return (1);
 	}
+	free(path);
 	return (status);
 }
