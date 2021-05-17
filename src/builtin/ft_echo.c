@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_to_array.c                                  :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 15:14:51 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 20:43:23 by yjung            ###   ########.fr       */
+/*   Created: 2021/04/26 21:06:12 by yjung             #+#    #+#             */
+/*   Updated: 2021/05/17 19:13:31 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	**ft_lst_to_array(t_list *lst)
+int	ft_echo(t_list *args)
 {
-	int		i;
-	t_list	*tmp;
-	void	**result;
+	int	status;
 
-	result = malloc(sizeof(void *) * (ft_lstsize(lst) + 1));
-	if (result == NULL)
-		return (0);
-	i = 0;
-	while (lst)
+	status = 0;
+	if (ft_strcmp(args->content, "-n") == 0)
 	{
-		result[i++] = (lst)->content;
-		tmp = lst;
-		lst = lst->next;
-		free(lst);
+		status = 1;
+		args = args->next;
 	}
-	result[i] = 0;
-	return (result);
+	while (args)
+	{
+		ft_putstr_fd(args->content, STDOUT_FILENO);
+		args = args->next;
+		if (args)
+			ft_putstr_fd(" ", STDOUT_FILENO);
+	}
+	if (status != 1)
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	return (0);
 }

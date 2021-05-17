@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   free_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 13:45:21 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/04/16 19:56:25 by jaeskim          ###   ########.fr       */
+/*   Created: 2021/05/12 19:59:36 by yjung             #+#    #+#             */
+/*   Updated: 2021/05/12 20:00:10 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_cmd(t_list *ASTs, char **envp)
+void	free_pipe(void *data)
 {
-	int		i;
+	t_pi_fd	*pipe;
 
-	printf("execute ASTs : %p\n", ASTs);
-	i = 0;
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		++i;
-	}
-	return (0);
+	pipe = data;
+	if (pipe)
+		ft_free(pipe);
 }

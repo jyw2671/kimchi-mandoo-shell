@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "functional": "c",
+    "minishell.h": "c",
+    "unistd.h": "c",
+    "sstream": "c",
+    "parse_util.h": "c",
+    "bitset": "c",
+    "ratio": "c",
+    "cursor.h": "c",
+    "envp.h": "c",
+    "typeinfo": "c"
+  }
+}

@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_to_array.c                                  :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 15:14:51 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 20:43:23 by yjung            ###   ########.fr       */
+/*   Created: 2021/04/14 13:45:21 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/05/17 18:01:17 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	**ft_lst_to_array(t_list *lst)
+int	exec_cmd(t_list *ASTs)
 {
-	int		i;
-	t_list	*tmp;
-	void	**result;
+	int		status;
+	t_check	g;
 
-	result = malloc(sizeof(void *) * (ft_lstsize(lst) + 1));
-	if (result == NULL)
-		return (0);
-	i = 0;
-	while (lst)
+	status = 0;
+	while (ASTs)
 	{
-		result[i++] = (lst)->content;
-		tmp = lst;
-		lst = lst->next;
-		free(lst);
+		ft_memset(&g, 0, sizeof(t_check));
+		g.save_in = -1;
+		g.save_out = -1;
+		status = exec_tree_parser(ASTs->content, &g);
+		ASTs = ASTs->next;
 	}
-	result[i] = 0;
-	return (result);
+	return (status);
 }

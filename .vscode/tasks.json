@@ -4,17 +4,25 @@
       "type": "cppbuild",
       "label": "build minishell",
       "command": "/usr/bin/make",
-      "args": ["re"],
+      "args": [
+        "re"
+      ],
       "options": {
         "cwd": "${workspaceFolder}",
         "env": {
-          "DEBUG" : "true"
+          "DEBUG": "true"
         }
       },
       "group": {
         "kind": "build",
         "isDefault": true
       },
+    },
+    {
+      "label": "Open Terminal",
+      "type": "shell",
+      "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'",
+      "problemMatcher": []
     }
   ],
   "version": "2.0.0"

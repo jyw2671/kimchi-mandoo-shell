@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_to_array.c                                  :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 15:14:51 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 20:43:23 by yjung            ###   ########.fr       */
+/*   Created: 2021/04/26 21:07:43 by yjung             #+#    #+#             */
+/*   Updated: 2021/05/16 21:36:48 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	**ft_lst_to_array(t_list *lst)
+static void	print_error(char *env)
 {
-	int		i;
-	t_list	*tmp;
-	void	**result;
+	ft_putstr_fd("minishell: unset: `", 2);
+	ft_putstr_fd("'", 2);
+	ft_putstr_fd(env, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+}
 
-	result = malloc(sizeof(void *) * (ft_lstsize(lst) + 1));
-	if (result == NULL)
-		return (0);
-	i = 0;
-	while (lst)
+int	ft_unset(t_list *args)
+{
+	char	*ptr;
+
+	while (args)
 	{
-		result[i++] = (lst)->content;
-		tmp = lst;
-		lst = lst->next;
-		free(lst);
+		ptr = ft_strchr(args->content, '=');
+		if (ptr)
+			print_error(args->content);
+		else
+			remove_envp(args->content);
+		args = args->next;
 	}
-	result[i] = 0;
-	return (result);
+	return (SUCCESS);
 }

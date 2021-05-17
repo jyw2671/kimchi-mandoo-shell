@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_to_array.c                                  :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 15:14:51 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 20:43:23 by yjung            ###   ########.fr       */
+/*   Created: 2021/05/15 19:21:46 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/05/15 19:23:31 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	**ft_lst_to_array(t_list *lst)
+int	ft_exit(void)
 {
-	int		i;
-	t_list	*tmp;
-	void	**result;
-
-	result = malloc(sizeof(void *) * (ft_lstsize(lst) + 1));
-	if (result == NULL)
-		return (0);
-	i = 0;
-	while (lst)
-	{
-		result[i++] = (lst)->content;
-		tmp = lst;
-		lst = lst->next;
-		free(lst);
-	}
-	result[i] = 0;
-	return (result);
+	exit(0);
+	return (0);
 }

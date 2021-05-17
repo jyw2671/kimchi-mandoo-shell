@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_to_array.c                                  :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/18 15:14:51 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 20:43:23 by yjung            ###   ########.fr       */
+/*   Created: 2021/05/08 23:02:36 by jaeskim           #+#    #+#             */
+/*   Updated: 2021/05/17 19:12:23 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-void	**ft_lst_to_array(t_list *lst)
-{
-	int		i;
-	t_list	*tmp;
-	void	**result;
+# include "minishell.h"
 
-	result = malloc(sizeof(void *) * (ft_lstsize(lst) + 1));
-	if (result == NULL)
-		return (0);
-	i = 0;
-	while (lst)
-	{
-		result[i++] = (lst)->content;
-		tmp = lst;
-		lst = lst->next;
-		free(lst);
-	}
-	result[i] = 0;
-	return (result);
-}
+int		ft_echo(t_list *args);
+int		ft_cd(t_list *args);
+int		ft_export(t_list *args);
+int		ft_unset(t_list *args);
+int		ft_env(t_list *args);
+int		ft_pwd(void);
+int		ft_exit(void);
+
+#endif

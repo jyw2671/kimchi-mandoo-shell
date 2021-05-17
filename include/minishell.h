@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/16 16:31:01 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/17 15:58:43 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include "util.h"
 # include "cursor.h"
 # include "envp.h"
+# include "builtin.h"
 
 # define TERM_ERROR	"Specify a terminal type with `setenv TERM <yourtype>'.\n"
 # define TERM_SUCCES_ERR	"Could not access the termcap data base.\n"
