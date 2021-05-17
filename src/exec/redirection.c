@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/16 19:07:30 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 17:50:29 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,22 @@ int	ft_redir_connect(t_check *g, int is_dup)
 	if (g->fd_in > 0)
 	{
 		if (is_dup)
+		{
 			g->save_in = dup(STDIN_FILENO);
-		if (g->save_in < 0)
-			return (DUP_ERROR);
+			if (g->save_in < 0)
+				return (DUP_ERROR);
+		}
 		if (dup2(g->fd_in, STDIN_FILENO) < 0)
 			return (DUP_ERROR);
 	}
 	if (g->fd_out > 0)
 	{
 		if (is_dup)
+		{
 			g->save_out = dup(STDOUT_FILENO);
-		if (g->save_out < 0)
-			return (DUP_ERROR);
+			if (g->save_out < 0)
+				return (DUP_ERROR);
+		}
 		if (dup2(g->fd_out, STDOUT_FILENO) < 0)
 			return (DUP_ERROR);
 	}

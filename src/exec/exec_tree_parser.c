@@ -6,11 +6,25 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 17:12:27 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/16 20:38:47 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 15:50:30 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	ft_ctr_op_exec(t_ctr_op *ctr, t_check *g)
+{
+	int		status;
+
+	status = 0;
+	status = exec_tree_parser(ctr->left, g);
+	if (ctr->type == FT_AND && status != 0)
+		return (status);
+	if (ctr->type == FT_OR && status == 0)
+		return (status);
+	status = exec_tree_parser(ctr->right, g);
+	return (status);
+}
 
 static int	is_builtin(t_cmd *cmds)
 {

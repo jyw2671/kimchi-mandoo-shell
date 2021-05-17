@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/15 22:34:03 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 17:42:00 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_set_pipe(t_check *g)
 		((t_pi_fd *)(g->pipe_fd->content))->check = PIPE_R_W;
 	ft_d_lstadd_back(&g->pipe_fd, ft_d_lstnew(num));
 	g->pipe_cnt++;
-	return (0);
+	return (SUCCESS);
 }
 
 void	ft_pipe_connect(int *status, t_check *g)
