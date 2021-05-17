@@ -6,23 +6,44 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 09:31:53 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/11 15:38:28 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/16 21:47:40 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*parse_arg(char *arg)
+static t_list	*destrocter(t_list *result, t_list *ret)
 {
-	t_list	*token;
+	if (result)
+		ft_lstclear(&result, ft_free);
+	return (ret);
+}
 
-	if (!ft_malloc((void **)&token, sizeof(t_list)))
-		return (NULL);
-	token->content = normalize(&arg, NORMALIZE_CMD);
-	if (token->content == NULL)
+static int	new_arg(t_list **target, char *value)
+{
+	if (!ft_malloc((void **)target, sizeof(t_list)))
+		return (-1);
+	(*target)->content = normalize(&value, NORMALIZE_CMD);
+	if ((*target)->content == NULL)
 	{
-		free(token);
-		return (NULL);
+		ft_free((*target));
+		return (-1);
 	}
-	return (token);
+	return (0);
+}
+
+t_list	*parse_arg(t_list *args)
+{
+	t_list	*result;
+	t_list	**curr;
+
+	curr = &result;
+	while (args)
+	{
+		if (new_arg(curr, args->content) == -1)
+			return (destrocter(result, PARSE_MALLOC));
+		args = args->next;
+		curr = &(*curr)->next;
+	}
+	return (result);
 }

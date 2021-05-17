@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:57:48 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 22:22:18 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/16 16:31:02 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,7 @@ void	handle_key_input(int keycode)
 	if (is_arrow_left_right(keycode))
 		return (handle_key_move(keycode));
 	if (keycode == KEY_HOME || keycode == KEY_END)
-		handle_home_end(keycode);
+		return (handle_home_end(keycode));
+	if (keycode == CLS)
+		return (clear_line());
 }

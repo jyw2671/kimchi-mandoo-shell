@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 22:23:31 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/16 16:31:01 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define EOF_CHAR		'\4'
 # define KEY_HOME		4741915
 # define KEY_END		4610843
+# define CLS			12
 
 # define PS1	"minishell>"
 
