@@ -6,23 +6,11 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 18:00:04 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/18 16:49:24 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static int	ft_redir_heredoc(t_AST *cmds, char *file, t_list **envp)
-// {
-// 	int	status;
-
-// 	// TODO: here_doc 구현 필요
-// 	(void)cmds;
-// 	(void)file;
-// 	(void)envp;
-// 	status = 0;
-// 	return (status);
-// }
 
 int	ft_redir_connect(t_check *g, int is_dup)
 {
