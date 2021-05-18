@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/17 16:38:40 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/17 22:28:16 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
-
-# define PARSE_ARG_ERR	1
 
 # define DUP_ERROR		-1
 # define MALLOC_FAIL	-2
@@ -54,7 +52,6 @@ int		exec_cmd(t_list *ASTs);
 int		exec_tree_parser(t_AST *cmds, t_check *g);
 // ft_cmd.c
 int		ft_cmd_exec(t_cmd *cmds, t_check *g);
-t_list	*parse_cmd_args(t_list *args_lst);
 // fork.c
 int		ft_built_cmd_set(t_cmd *cmds, t_check *g);
 int		ft_cmd_set(t_cmd *cmds, t_check *g);
