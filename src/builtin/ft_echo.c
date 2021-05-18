@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:06:12 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 19:13:31 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/18 15:17:56 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int	ft_echo(t_list *args)
 	int	status;
 
 	status = 0;
+	if (!args)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return (0);
+	}
 	if (ft_strcmp(args->content, "-n") == 0)
 	{
 		status = 1;

@@ -56,8 +56,8 @@ int		exec_tree_parser(t_AST *cmds, t_check *g);
 int		ft_cmd_exec(t_cmd *cmds, t_check *g);
 t_list	*parse_cmd_args(t_list *args_lst);
 // fork.c
-int		ft_built_cmd_set(t_cmd *cmds, t_check *g);
 int		ft_cmd_set(t_cmd *cmds, t_check *g);
+int		builtin_cmd_set(t_cmd *cmds, t_check *g);
 int		builtin_pipe_set(t_cmd *cmds, t_check *g);
 // redirection.c
 int		ft_redir_exec(t_redirect *redir, t_check *g);
@@ -74,6 +74,12 @@ int		parse_cmd_err_check(char *args);
 // ft_error.c
 void	ft_error_print(char *msg, char *val);
 // free_exec.c
+int		ft_free_cmd(void *target, int ret);
 void	free_pipe(void *data);
+// parse_cmd.c
+t_cmd	*parse_t_cmd(t_cmd *cmds, int *status);
+t_list	*parse_cmd_args(t_list *args_lst);
+// builtin_parser.c
+int		builtin_parser(t_cmd *cmds, t_check *g);
 
 #endif
