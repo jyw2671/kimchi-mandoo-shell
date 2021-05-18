@@ -6,30 +6,44 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 15:45:57 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 15:52:28 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/18 15:58:59 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_pipe_set(t_cmd *cmds, t_check *g)
+// int	builtin_pipe_set(t_cmd *cmds, t_check *g)
+// {
+// 	if (g->pipe_cnt > 0 && ((t_pi_fd *)(g->pipe_fd->content))->check \
+// 		== PIPE_R_ONLY)
+// 		return (ft_built_cmd_set(cmds, g));
+// 	if (g->fd_out > 0)
+// 	{
+// 		if (ft_redir_connect(g, 1) == DUP_ERROR)
+// 			return (DUP_ERROR);
+// 		if (ft_cmd_exec(cmds, g) == FAIL)
+// 			return (FAIL);
+// 		ft_redir_close(g);
+// 		return (SUCCESS);
+// 	}
+// 	return (ft_cmd_exec(cmds, g));
+// }
+
+int	builtin_cmd_set(t_cmd *cmds, t_check *g)
 {
-	if (g->pipe_cnt > 0 && ((t_pi_fd *)(g->pipe_fd->content))->check \
-		== PIPE_R_ONLY)
-		return (ft_built_cmd_set(cmds, g));
-	if (g->fd_out > 0)
-	{
-		if (ft_redir_connect(g, 1) == DUP_ERROR)
-			return (DUP_ERROR);
-		if (ft_cmd_exec(cmds, g) == FAIL)
-			return (FAIL);
-		ft_redir_close(g);
-		return (SUCCESS);
-	}
-	return (ft_cmd_exec(cmds, g));
+	int	status;
+
+	status = ft_redir_connect(g, 1);
+	if (status < 0)
+		return (status);
+	status = ft_cmd_exec(cmds, g);
+	if (status < 0)
+		return (status);
+	ft_redir_close(g);
+	return (status);
 }
 
-int	ft_built_cmd_set(t_cmd *cmds, t_check *g)
+int	builtin_pipe_set(t_cmd *cmds, t_check *g)
 {
 	pid_t	pid;
 	int		status;
