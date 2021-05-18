@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/17 22:02:18 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/16 19:57:52 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-# define PARSE_ERROR_COUNT	6
+# define PARSE_ERROR_COUNT	5
 # define PARSE_MALLOC		0
 # define PARSE_MALLOC_MSG	"Memory allocation failure\n"
 # define PARSE_INVAILD		1
