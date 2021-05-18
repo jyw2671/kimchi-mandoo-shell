@@ -23,7 +23,7 @@ static int	new_arg(t_list **target, char *value)
 {
 	if (!ft_malloc((void **)target, sizeof(t_list)))
 		return (-1);
-	(*target)->content = normalize(&value, NORMALIZE_ARG);
+	(*target)->content = normalize(&value, NORMALIZE_CMD);
 	if ((*target)->content == NULL)
 	{
 		ft_free((*target));
