@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 16:42:32 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/17 21:44:03 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ t_AST	*syntax_AST(t_list **token);
 
 void	print_AST(t_AST	*AST, int depth);
 void	print_depth(int depth);
+
+int		is_wildcard(char *str);
 
 #endif

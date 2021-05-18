@@ -25,7 +25,8 @@
 # define PARSE_NOTTHING		3
 # define PARSE_CMD_NONE		4
 # define PARSE_CMD_NONE_MSG	"command not found: "
-# define PARSE_OPEN			5
+# define PARSE_WILDCARD		5
+# define PARSE_WILDCARD_MSG	"No such file or directory"
 
 # define NORMALIZE_CMD	0
 # define NORMALIZE_ARG	1
