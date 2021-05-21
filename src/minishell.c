@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 19:45:35 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 19:56:10 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	minishell(void)
 	t_list	*tmp;
 	t_list	*ASTs;
 
+	g_sh.signal = 0;
 	print_PS1();
 	get_line();
 	if (g_sh.line == NULL)

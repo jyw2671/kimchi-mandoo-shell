@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_type.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:34:36 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 16:59:12 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 17:19:17 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ typedef struct s_history
 
 typedef struct s_minishell
 {
+	int				signal;
 	int				status;
+	int				isps2;
+	int				eof;
+	int				read_fd;
 	char			*line;
 	t_history		*cmd;
 	t_history		*history;

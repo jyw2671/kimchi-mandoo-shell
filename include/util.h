@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:13:06 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 23:52:09 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 15:10:34 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include "minishell.h"
 
 int		getch(void);
+void	print_PS(void);
 void	print_PS1(void);
+void	print_PS2(void);
 void	get_line(void);
 void	handle_key_input(int keycode);
 void	handle_history(int keycode);

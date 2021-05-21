@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:19:08 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/15 22:31:21 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 17:14:15 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,32 @@ void	setup_line(void)
 	g_sh.history = g_sh.cmd;
 }
 
+static int	check_EOF(int keycode)
+{
+	if (is_eof(keycode) && (g_sh.line == NULL || !*g_sh.line))
+	{
+		g_sh.eof = 1;
+		ft_free(g_sh.line);
+		if (g_sh.isps2)
+			return (1);
+		ft_putstr_fd("exit\n", 2);
+		exit_minishell(0);
+	}
+	return (0);
+}
+
 void	get_line(void)
 {
 	int		c;
 
-	(!(g_sh.line = 0) && !(g_sh.cmd_i = 0) && (g_sh.cmd_s = 0));
-	c = getch();
+	(!(c = 0) && !(g_sh.line = 0) && !(g_sh.cmd_i = 0) && \
+	!(g_sh.cmd_s = 0) && !(g_sh.eof = 0) && (c = getch()));
 	while (c != (int) '\n')
 	{
+		if (check_EOF(c))
+			break ;
+		if (g_sh.signal == SIGINT)
+			return ;
 		if (is_special_key(c))
 			handle_key_input(c);
 		else if (ft_isprint(c))

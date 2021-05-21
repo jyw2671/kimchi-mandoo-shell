@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 17:46:14 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 23:46:26 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 15:11:36 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	handle_history(int keycode)
 	else if (keycode == ARROW_DOWN && handle_history_next())
 		return ;
 	delete_line();
-	print_PS1();
+	print_PS();
 	if (g_sh.history->edit_cmd)
 		g_sh.line = g_sh.history->edit_cmd;
 	else

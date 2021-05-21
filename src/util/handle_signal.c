@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 04:27:38 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/08 23:51:40 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 19:52:34 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 static void	handle_sigint(int sig)
 {
-	(void)sig;
+	g_sh.signal = sig;
 	ft_free(g_sh.line);
 	g_sh.line = NULL;
 	ft_putchar_fd('\n', 1);
-	print_PS1();
+	if (!g_sh.isps2)
+		print_PS1();
+	if (g_sh.read_fd > 0)
+	{
+		close(g_sh.read_fd);
+		g_sh.read_fd = -1;
+	}
 }
 
 static void	handle_sigquit(int sig)
 {
-	(void)sig;
+	g_sh.signal = sig;
 }
 
 void	set_handle_signal(void)
