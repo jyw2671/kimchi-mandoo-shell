@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 19:56:10 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 19:58:50 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_minishell	g_sh;
 
 static void	minishell(void)
 {
-	t_list	*tmp;
 	t_list	*ASTs;
 
 	g_sh.signal = 0;
@@ -30,12 +29,6 @@ static void	minishell(void)
 		print_parse_err(ASTs);
 	else
 	{
-		tmp = ASTs;
-		while (tmp)
-		{
-			print_AST(tmp->content, 0);
-			tmp = tmp->next;
-		}
 		exec_cmd(ASTs);
 		ft_lstclear(&ASTs, free_AST);
 	}
