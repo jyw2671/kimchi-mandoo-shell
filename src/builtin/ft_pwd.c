@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:16:26 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 19:45:06 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:36:34 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_pwd(void)
 	status = 0;
 	if (getcwd(name, PATH_MAX) == NULL)
 	{
-		ft_error_print("pwd", strerror(errno));
+		ft_error_print("pwd", NULL, strerror(errno));
 		return (FAIL);
 	}
 	else

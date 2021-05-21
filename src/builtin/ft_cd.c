@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:13:05 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 19:53:28 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:33:07 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ static int	cd_args_dir(t_list *args)
 	if (path == NULL)
 		return (MALLOC_FAIL);
 	status = chdir(path);
-	free(path);
 	if (status < 0)
 	{
-		ft_error_print("cd", strerror(errno));
+		ft_error_print("cd", path, strerror(errno));
+		free(path);
 		return (FAIL);
 	}
+	free(path);
 	return (SUCCESS);
 }
 

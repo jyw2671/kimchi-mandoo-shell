@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_t_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:53:06 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 18:03:00 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 22:34:13 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_list	*parse_cmd_args(t_list *args_lst)
 	{
 		result = parse_arg(args_lst);
 		if ((int)result == PARSE_MALLOC)
-			ft_error_print(PARSE_MALLOC_MSG, strerror(errno));
+			ft_error_print(PARSE_MALLOC_MSG, NULL, strerror(errno));
 		else if ((int)result == PARSE_CMD_NONE)
-			ft_error_print(PARSE_CMD_NONE_MSG, strerror(errno));
+			ft_error_print(PARSE_CMD_NONE_MSG, NULL, strerror(errno));
 		return (result);
 	}
 	return (NULL);

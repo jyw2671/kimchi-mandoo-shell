@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 15:45:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 17:41:08 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:33:56 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	parse_cmd_err_check(char *args)
 {
 	if ((int)args == PARSE_MALLOC)
-		ft_error_print(PARSE_MALLOC_MSG, strerror(errno));
+		ft_error_print(PARSE_MALLOC_MSG, NULL, strerror(errno));
 	else if ((int)args == PARSE_CMD_NONE)
-		ft_error_print(PARSE_CMD_NONE_MSG, strerror(errno));
+		ft_error_print(PARSE_CMD_NONE_MSG, NULL, strerror(errno));
 	else
 		return (SUCCESS);
 	return (FAIL);

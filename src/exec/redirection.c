@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 17:29:34 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 22:34:47 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_redir_exec(t_redirect *redir, t_check *g)
 	if (g->fd_in < 0 || g->fd_out < 0)
 	{
 		if (!(redir->type == FT_FD_HEREDOC))
-			ft_error_print("open fail", strerror(errno));
+			ft_error_print("open fail", NULL, strerror(errno));
 		return (-1);
 	}
 	return (exec_tree_parser(redir->AST, g));

@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 15:45:57 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 16:19:08 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:33:38 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	builtin_pipe_set(t_cmd *cmds, t_check *g)
 	status = 0;
 	pid = fork();
 	if (pid < 0)
-		ft_error_print("fail fork", strerror(errno));
+		ft_error_print("fail fork", NULL, strerror(errno));
 	else if (pid == 0)
 	{
 		ft_pipe_connect(&status, g);
@@ -62,7 +62,7 @@ int	ft_cmd_set(t_cmd *cmds, t_check *g)
 	status = 0;
 	pid = fork();
 	if (pid < 0)
-		ft_error_print("fail fork", strerror(errno));
+		ft_error_print("fail fork", NULL, strerror(errno));
 	if (pid == 0)
 	{
 		ft_pipe_connect(&status, g);

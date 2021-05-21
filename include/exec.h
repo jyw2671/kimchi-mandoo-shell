@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/21 19:56:51 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/21 22:35:57 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_pipe_close(t_check *g);
 int		ft_make_cmd(char *cmd, t_list *args_lst);
 int		parse_cmd_err_check(char *args);
 // ft_error.c
-void	ft_error_print(char *msg, char *val);
+void	ft_error_print(char *msg, char *args, char *val);
 // free_exec.c
 int		ft_free_cmd(void *target, int ret);
 void	free_pipe(void *data);
