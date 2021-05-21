@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 15:45:57 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 12:59:33 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 16:19:08 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	ft_cmd_set(t_cmd *cmds, t_check *g)
 	{
 		ft_pipe_connect(&status, g);
 		if (status < 0)
-			return (status);
+			exit(status);
 		status = ft_redir_connect(g, 0);
 		if (status < 0)
-			return (status);
+			exit(status);
 		status = ft_make_cmd(cmds->cmd, cmds->args);
 		exit(status);
 	}

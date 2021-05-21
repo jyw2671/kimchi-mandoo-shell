@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_AST.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 18:09:22 by jaeskim           #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2021/05/21 18:02:57 by jaeskim          ###   ########.fr       */
+=======
+/*   Updated: 2021/05/21 17:59:03 by yjung            ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 

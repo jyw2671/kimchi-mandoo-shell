@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 17:48:20 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 18:01:08 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 16:18:26 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ft_pipe_connect(int *status, t_check *g)
 		num = (g->pipe_fd->next)->content;
 		*status = dup2(num->pi_read, STDOUT_FILENO);
 	}
+	if (*status != 0)
+		ft_pipe_close(g);
 }
 
 void	ft_pipe_write_close(t_check *g, int check)
