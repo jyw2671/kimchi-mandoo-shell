@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/18 16:49:24 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 17:29:34 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,28 +74,39 @@ int	ft_redir_close(t_check *g)
 	return (status);
 }
 
+static void	clear_redire_io(t_check *g)
+{
+	if (g->fd_in > 0)
+		close(g->fd_in);
+	if (g->fd_out > 0)
+		close(g->fd_out);
+}
+
 int	ft_redir_exec(t_redirect *redir, t_check *g)
 {
-	int	status;
+	char	*path;
 
-	status = 0;
-	if (redir->type == FT_FD_IN)
-	{
-		g->fd_in = open(redir->file, O_RDONLY);
+	path = redir->file;
+	path = normalize(&path, NORMALIZE_CMD);
+	if (path == NULL)
+		return (MALLOC_FAIL);
+	clear_redire_io(g);
+	if (redir->type == FT_FD_IN || redir->type == FT_FD_HEREDOC)
 		g->redir_in = 1;
-	}
+	if (redir->type == FT_FD_IN)
+		g->fd_in = open(path, O_RDONLY);
+	else if (redir->type == FT_FD_HEREDOC)
+		g->fd_in = heredoc(path);
 	else if (redir->type == FT_FD_OUT)
-		g->fd_out = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		g->fd_out = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (redir->type == FT_FD_APPEND)
-		g->fd_out = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		g->fd_out = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	free(path);
 	if (g->fd_in < 0 || g->fd_out < 0)
 	{
-		status = -1;
-		ft_error_print("open fail", strerror(errno));
+		if (!(redir->type == FT_FD_HEREDOC))
+			ft_error_print("open fail", strerror(errno));
+		return (-1);
 	}
-	else if (!redir->AST)
-		return (SUCCESS);
-	else
-		status = exec_tree_parser(redir->AST, g);
-	return (status);
+	return (exec_tree_parser(redir->AST, g));
 }

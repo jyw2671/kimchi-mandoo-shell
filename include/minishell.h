@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 22:30:59 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/17 15:58:43 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 17:18:28 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <dirent.h>
+# include <sys/ioctl.h>
 
 # include <libft.h>
 # include "minishell_type.h"
@@ -51,6 +52,7 @@
 # define CLS			12
 
 # define PS1	"minishell>"
+# define PS2	"> "
 
 extern t_minishell	g_sh;
 
