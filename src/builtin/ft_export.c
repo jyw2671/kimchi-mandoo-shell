@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:11:40 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 16:25:37 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 19:20:27 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_error(char *env)
 {
-	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd("minishell: export: ", 2);
 	ft_putstr_fd("'", 2);
 	ft_putstr_fd(env, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
