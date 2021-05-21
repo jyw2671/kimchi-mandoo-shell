@@ -6,7 +6,7 @@
 /*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 18:09:22 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/09 16:54:05 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/17 17:40:48 by jaeskim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	print_CMD(t_cmd *cmd, int depth)
 	if (cmd == NULL)
 		return ;
 	curr = cmd->args;
+	if (cmd->args)
+		curr = parse_arg(cmd->args);
 	print_depth(depth);
 	printf("%s{ \n", TEXT_COLOR);
 	print_depth(depth);

@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 13:00:30 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 13:12:01 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_minishell	g_sh;
 
 static void	minishell(void)
 {
-	// t_list	*tmp;
+	t_list	*tmp;
 	t_list	*ASTs;
 
 	print_PS1();
@@ -29,12 +29,12 @@ static void	minishell(void)
 		print_parse_err(ASTs);
 	else
 	{
-		// tmp = ASTs;
-		// while (tmp)
-		// {
-		// 	print_AST(tmp->content, 0);
-		// 	tmp = tmp->next;
-		// }
+		tmp = ASTs;
+		while (tmp)
+		{
+			print_AST(tmp->content, 0);
+			tmp = tmp->next;
+		}
 		exec_cmd(ASTs);
 		ft_lstclear(&ASTs, free_AST);
 	}
