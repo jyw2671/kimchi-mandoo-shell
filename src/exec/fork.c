@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 15:45:57 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/18 16:49:05 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 12:59:33 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ int	builtin_cmd_set(t_cmd *cmds, t_check *g)
 
 	status = ft_redir_connect(g, 1);
 	if (status < 0)
+	{
+		ft_redir_close(g);
 		return (status);
+	}
 	status = ft_cmd_exec(cmds, g);
-	if (status < 0)
-		return (status);
 	ft_redir_close(g);
 	return (status);
 }
@@ -46,13 +47,11 @@ int	builtin_pipe_set(t_cmd *cmds, t_check *g)
 		status = ft_cmd_exec(cmds, g);
 		exit(status);
 	}
-	else
-	{
-		wait(&pid);
-		ft_redir_close(g);
-		ft_pipe_close(g);
-	}
-	return (status);
+	waitpid(pid, &status, WUNTRACED);
+	g_sh.status += (status >> 8) & 0xff;
+	ft_redir_close(g);
+	ft_pipe_close(g);
+	return (g_sh.status);
 }
 
 int	ft_cmd_set(t_cmd *cmds, t_check *g)
@@ -75,11 +74,9 @@ int	ft_cmd_set(t_cmd *cmds, t_check *g)
 		status = ft_make_cmd(cmds->cmd, cmds->args);
 		exit(status);
 	}
-	else
-	{
-		wait(&pid);
-		ft_redir_close(g);
-		ft_pipe_close(g);
-	}
-	return (status);
+	waitpid(pid, &status, WUNTRACED);
+	g_sh.status += (status >> 8) & 0xff;
+	ft_redir_close(g);
+	ft_pipe_close(g);
+	return (g_sh.status);
 }
