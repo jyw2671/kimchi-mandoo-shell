@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:11:40 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/17 18:00:35 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 16:25:37 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ static void	print_error(char *env)
 	ft_putstr_fd("': not a valid identifier\n", 2);
 }
 
-static void	print_export(void)
+static void	print_export(t_list	*env)
 {
-	t_list	*env;
 	char	*ptr;
 	char	*str;
 
-	env = g_sh.envp;
 	while (env)
 	{
 		ptr = ft_strchr(env->content, '=');
@@ -71,9 +69,14 @@ static int	check_envp_name(char *arg)
 int	ft_export(t_list *args)
 {
 	char	*value;
+	t_list	*result;
 
 	if (!args)
-		print_export();
+	{
+		result = g_sh.envp;
+		ft_lstsort(&result, compare);
+		print_export(result);
+	}
 	while (args)
 	{
 		value = ft_strdup(args->content);
