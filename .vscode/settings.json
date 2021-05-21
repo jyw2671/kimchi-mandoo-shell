@@ -3,6 +3,20 @@
     "functional": "c",
     "minishell.h": "c",
     "unistd.h": "c",
+<<<<<<< Updated upstream
     "sstream": "c"
+=======
+<<<<<<< HEAD
+    "sstream": "c",
+    "parse_util.h": "c",
+    "bitset": "c",
+    "ratio": "c",
+    "cursor.h": "c",
+    "envp.h": "c",
+    "typeinfo": "c"
+=======
+    "sstream": "c"
+>>>>>>> origin/master
+>>>>>>> Stashed changes
   }
 }

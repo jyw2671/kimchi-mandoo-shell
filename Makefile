@@ -6,7 +6,15 @@
 #    By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/06 21:07:58 by jaeskim           #+#    #+#              #
+<<<<<<< Updated upstream
 #    Updated: 2021/05/09 16:09:21 by yjung            ###   ########.fr        #
+=======
+<<<<<<< HEAD
+#    Updated: 2021/05/13 14:56:03 by yjung            ###   ########.fr        #
+=======
+#    Updated: 2021/05/09 16:09:21 by yjung            ###   ########.fr        #
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 #                                                                              #
 # **************************************************************************** #
 

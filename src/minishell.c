@@ -6,7 +6,15 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:40:29 by yjung             #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2021/05/09 17:03:48 by yjung            ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2021/05/21 19:58:50 by jaeskim          ###   ########.fr       */
+=======
+/*   Updated: 2021/05/09 17:03:48 by yjung            ###   ########.fr       */
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +37,7 @@ static void	minishell(void)
 		print_parse_err(ASTs);
 	else
 	{
+<<<<<<< Updated upstream
 		tmp = ASTs;
 		while (tmp)
 		{
@@ -36,6 +45,20 @@ static void	minishell(void)
 			tmp = tmp->next;
 		}
 		exec_cmd(ASTs);
+=======
+<<<<<<< HEAD
+		exec_cmd(ASTs);
+		ft_lstclear(&ASTs, free_AST);
+=======
+		tmp = ASTs;
+		while (tmp)
+		{
+			print_AST(tmp->content, 0);
+			tmp = tmp->next;
+		}
+		exec_cmd(ASTs);
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 	}
 }
 
