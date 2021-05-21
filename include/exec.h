@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/17 16:38:40 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/21 14:05:04 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_error_print(char *msg, char *val);
 // free_exec.c
 int		ft_free_cmd(void *target, int ret);
 void	free_pipe(void *data);
+void	free_g(t_check *g);
 // parse_cmd.c
 t_cmd	*parse_t_cmd(t_cmd *cmds, int *status);
 t_list	*parse_cmd_args(t_list *args_lst);
