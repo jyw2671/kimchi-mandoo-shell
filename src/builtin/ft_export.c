@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:11:40 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 20:00:09 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/22 13:38:09 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_error(char *env)
 {
 	ft_putstr_fd("minishell: export: ", 2);
-	ft_putstr_fd("'", 2);
+	ft_putstr_fd("`", 2);
 	ft_putstr_fd(env, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
 }
@@ -61,35 +61,42 @@ static int	check_envp_name(char *arg)
 	{
 		if ((len == 0 && !(ft_isalpha(arg[len]) || arg[len] == '_')) \
 			|| !(ft_isalnum(arg[len]) || arg[len] == '_'))
-			return (FAIL);
+			return (1);
 	}
 	return (SUCCESS);
+}
+
+static void	is_args(void)
+{
+	t_list	*result;
+
+	result = g_sh.envp;
+	ft_lstsort(&result, compare);
+	print_export(result);
 }
 
 int	ft_export(t_list *args)
 {
 	char	*value;
-	t_list	*result;
+	int		status;
 
+	status = 0;
 	if (!args)
-	{
-		result = g_sh.envp;
-		ft_lstsort(&result, compare);
-		print_export(result);
-	}
+		is_args();
 	while (args)
 	{
 		value = ft_strdup(args->content);
 		if (value == NULL)
 			return (MALLOC_FAIL);
-		if (check_envp_name(value) == FAIL)
+		if (check_envp_name(value) != SUCCESS)
 		{
 			print_error(value);
 			ft_free(value);
+			status = 1;
 		}
 		else if (set_envp(value) == MALLOC_FAIL)
 			return (MALLOC_FAIL);
 		args = args->next;
 	}
-	return (SUCCESS);
+	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 21:07:43 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 18:43:15 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/22 14:36:40 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,21 @@ int	ft_unset(t_list *args)
 {
 	char	*ptr;
 	t_list	*cmp;
+	int		status;
 
+	status = 0;
 	cmp = args;
 	while (cmp)
 	{
 		ptr = ft_strchr(cmp->content, '=');
 		if (ptr)
+		{
 			print_error(cmp->content);
+			status = 1;
+		}
 		else
 			remove_envp(cmp->content);
 		cmp = cmp->next;
 	}
-	return (SUCCESS);
+	return (status);
 }

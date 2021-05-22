@@ -6,13 +6,13 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:53:06 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 22:34:13 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/22 13:15:26 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*parse_cmd_args(t_list *args_lst)
+t_list	*parse_cmd_args(t_list *args_lst, t_check *g)
 {
 	t_list	*result;
 
@@ -23,12 +23,14 @@ t_list	*parse_cmd_args(t_list *args_lst)
 			ft_error_print(PARSE_MALLOC_MSG, NULL, strerror(errno));
 		else if ((int)result == PARSE_CMD_NONE)
 			ft_error_print(PARSE_CMD_NONE_MSG, NULL, strerror(errno));
+		else if (args_lst->content != result->content)
+			g->args_check = 1;
 		return (result);
 	}
 	return (NULL);
 }
 
-t_cmd	*parse_t_cmd(t_cmd *cmds, int *status)
+t_cmd	*parse_t_cmd(t_cmd *cmds, int *status, t_check *g)
 {
 	t_cmd	*result;
 
@@ -47,7 +49,7 @@ t_cmd	*parse_t_cmd(t_cmd *cmds, int *status)
 	}
 	if (cmds->args == NULL)
 		return (result);
-	result->args = parse_cmd_args(cmds->args);
+	result->args = parse_cmd_args(cmds->args, g);
 	if (result->args <= (t_list *)PARSE_ERROR_COUNT)
 		*status = (int)result->args;
 	return (result);

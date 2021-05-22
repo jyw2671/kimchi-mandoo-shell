@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeskim <jaeskim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:16:05 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 20:17:54 by jaeskim          ###   ########.fr       */
+/*   Updated: 2021/05/22 14:32:43 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	compare_ascii(char c, int *flag)
 {
-	if (c >= 'a' && c <= 'z')
+	if ('0' <= c && c <= '9')
 		*flag = 4;
 	else if ('A' <= c && c <= 'Z')
 		*flag = 3;
-	else if ('0' <= c && c <= '9')
-		*flag = 2;
 	else if (c == '_')
+		*flag = 2;
+	else if (c >= 'a' && c <= 'z')
 		*flag = 1;
 }
 
@@ -42,7 +42,7 @@ static int	compare_cnt(char *a, char *b)
 			compare_ascii(a[cnt], &flag_a);
 			compare_ascii(b[cnt], &flag_b);
 			if (flag_a != flag_b)
-				return (flag_a > flag_b);
+				return (flag_a < flag_b);
 			return (a[cnt] > b[cnt]);
 		}
 		++cnt;
@@ -68,6 +68,6 @@ int	compare(t_list *a, t_list *b)
 		size[1] = ft_strlen(b->content);
 	status = compare_cnt(a->content, b->content);
 	if (status == 2)
-		return (size[0] < size[1]);
+		return (size[0] > size[1]);
 	return (status);
 }

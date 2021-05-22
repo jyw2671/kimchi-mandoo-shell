@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 22:26:53 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/18 15:19:21 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/22 13:16:44 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_cmd_exec(t_cmd *cmds, t_check *g)
 	else if (ft_strcmp(cmds->cmd, "pwd") == 0)
 		status = ft_pwd();
 	else if (ft_strcmp(cmds->cmd, "env") == 0)
-		status = ft_env(cmds->args);
+		status = ft_env(cmds->args, g);
 	else if (ft_strcmp(cmds->cmd, "export") == 0)
 		status = ft_export(cmds->args);
 	else if (ft_strcmp(cmds->cmd, "unset") == 0)
