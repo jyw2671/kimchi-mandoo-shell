@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 13:41:05 by jaeskim           #+#    #+#             */
-/*   Updated: 2021/05/21 22:35:57 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/22 10:56:46 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_pipe_connect(int *status, t_check *g);
 void	ft_pipe_close(t_check *g);
 // make_cmd.c
 int		ft_make_cmd(char *cmd, t_list *args_lst);
-int		parse_cmd_err_check(char *args);
+int		parse_cmd_err_check(char *args, char *print_args);
 // ft_error.c
 void	ft_error_print(char *msg, char *args, char *val);
 // free_exec.c

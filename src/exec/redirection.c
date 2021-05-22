@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 12:56:09 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/21 22:34:47 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/22 12:34:55 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ int	ft_redir_close(t_check *g)
 
 	status = 0;
 	if (g->fd_in > 0)
-		status = redir_connect_dup(&g->fd_in, &g->save_in, 1);
+		status = redir_connect_dup(&(g->fd_in), &(g->save_in), 1);
 	if (status < 0)
 		return (status);
 	if (g->fd_out > 0)
-		status = redir_connect_dup(&g->fd_out, &g->save_out, 0);
+		status = redir_connect_dup(&(g->fd_out), &(g->save_out), 0);
 	return (status);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yjung <yjung@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:47:11 by yjung             #+#    #+#             */
-/*   Updated: 2021/05/18 16:00:22 by yjung            ###   ########.fr       */
+/*   Updated: 2021/05/22 12:05:18 by yjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	builtin_parser(t_cmd *cmds, t_check *g)
 	if (status != SUCCESS)
 		return (ft_free_cmd(result, FAIL));
 	check = is_builtin(result);
-	if (g->pipe_cnt > 0)
+	if (check == 1 && g->pipe_cnt > 0)
 		check = 2;
 	if (check == 0)
 		status = ft_cmd_exec(result, g);
